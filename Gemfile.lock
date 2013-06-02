@@ -30,6 +30,10 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.2)
     builder (3.0.4)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.1)
+      climate_control (>= 0.0.3, < 1.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -40,8 +44,6 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
-    foreigner (1.4.1)
-      activerecord (>= 3.0.0)
     hike (1.2.2)
     i18n (0.6.1)
     journey (1.0.4)
@@ -54,6 +56,12 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.23)
     multi_json (1.7.4)
+    paperclip (3.4.2)
+      activemodel (>= 3.0.0)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.0)
+      mime-types
     pg (0.15.1)
     polyglot (0.3.3)
     rack (1.4.5)
@@ -107,8 +115,8 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
-  foreigner
   jquery-rails
+  paperclip
   pg
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)

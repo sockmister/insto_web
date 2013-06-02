@@ -39,4 +39,6 @@ gem 'jquery-rails'
 # gem 'debugger'
 
 # Other Gems
-gem 'foreigner'
+
+# For image attachment
+gem 'paperclip'
