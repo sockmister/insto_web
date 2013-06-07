@@ -29,8 +29,8 @@ ActiveRecord::Schema.define(:version => 20130607055630) do
   end
 
   create_table "submissions", :force => true do |t|
-    t.integer  "location_id_id"
-    t.integer  "user_id_id"
+    t.integer  "location_id"
+    t.integer  "user_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
     t.string   "image_file_name"

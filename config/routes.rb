@@ -5,7 +5,7 @@ Insto::Application.routes.draw do
   # user has many requests
   resources :user do
     resources :request
-    # resources :submissions
+    resources :submission
   end
 
   # location has many requests

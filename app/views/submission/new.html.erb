@@ -1,0 +1,16 @@
+<%= form_for @submission, :url => {:action => "create"} do |f| %>
+
+	<%= f.label :location_id %>
+  <%= f.text_field :location_id %>
+</br>
+
+  <%= f.label :user_id %>
+  <%= f.text_field :user_id %>
+ </br>
+
+  <%= f.label :image %>
+  <%= f.file_field :image %>
+
+</br>
+  <%= f.submit "Submit"%>
+<% end %>
