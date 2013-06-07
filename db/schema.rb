@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130602134150) do
+ActiveRecord::Schema.define(:version => 20130607055630) do
 
   create_table "locations", :force => true do |t|
     t.string   "faculty"
@@ -22,9 +22,10 @@ ActiveRecord::Schema.define(:version => 20130602134150) do
 
   create_table "requests", :force => true do |t|
     t.string   "location"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.integer  "user_id"
+    t.integer  "location_id"
   end
 
   create_table "submissions", :force => true do |t|

@@ -8,16 +8,21 @@ class RequestController < ApplicationController
 	end
 
 	def create
-		@new_request = Request.new
-		# do some checking please
-		@user = User.where(:user => params[:user_id])
-		if @user.empty?
-			render :json => @new_request
-		else
-			@new_request.user_id = @user[0].id
-			@new_request.location = params[:location]
-			@new_request.save
-			render :json => @new_request
+		# @new_request = Request.new
+		# # do some checking please
+		# @user = User.where(:user => params[:user_id])
+		# if @user.empty?
+		# 	render :json => @new_request
+		# else
+		# 	@new_request.user_id = @user[0].id
+		# 	@new_request.location = params[:location]
+		# 	@new_request.save
+		# 	render :json => @new_request
+		# end
+		# respond_to :json
+		@request = Request.new(params[:request])
+		if @request.save
+			render :json => @request
 		end
 	end
 
