@@ -1,6 +1,7 @@
 package com.example.icreatesecretproject;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -23,7 +24,9 @@ public class LocationGridActivity extends Activity {
 
 		    gridview.setOnItemClickListener(new OnItemClickListener() {
 		        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-		            Toast.makeText(LocationGridActivity.this, "" + position, Toast.LENGTH_SHORT).show();
+		    		Intent intent = new Intent(getBaseContext(), LocationInFacultyActivity.class);
+		        	startActivity(intent);
+		        	Toast.makeText(LocationGridActivity.this, "" + position, Toast.LENGTH_SHORT).show();
 		        }
 		    });
 	}
