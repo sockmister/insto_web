@@ -28,6 +28,7 @@ public class MainMenuFragment extends ListFragment {
 				getActivity(), android.R.layout.simple_list_item_1,
 				android.R.id.text1, menuItems);
 		setListAdapter(menuItemsAdapter);
+		setListAdapter(menuItemsAdapter);
 	}
 
 	@Override
