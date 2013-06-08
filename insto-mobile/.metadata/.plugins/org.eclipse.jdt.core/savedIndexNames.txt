@@ -1,0 +1,6 @@
+INDEX VERSION 1.126+C:\Users\bearjew\Desktop\adt-bundle-windows-x86_64-20130219\android workspace\instO\.metadata\.plugins\org.eclipse.jdt.core
+3427192898.index
+3571150417.index
+121059562.index
+2976849568.index
+3753445075.index
