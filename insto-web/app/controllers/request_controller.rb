@@ -40,8 +40,15 @@ class RequestController < ApplicationController
 
 	def top
 		# get top 50 requests sorted by count
-		@top_request = Request.select("location as location, count(*) as request_count")
-													.group("location").order("request_count DESC").limit(20)
+		@top_request = Request.find_by_sql("
+			SELECT l.faculty AS faculty, l.id AS location_id, l.name AS location_name, count(*) as request_count
+			FROM locations l, requests r
+			WHERE l.id = r.location_id
+			GROUP BY location_name
+			ORDER BY request_count DESC
+			LIMIT 0, 10
+			")
+		# @top_request = Request.all
 		render :json => @top_request
 	end
 end
