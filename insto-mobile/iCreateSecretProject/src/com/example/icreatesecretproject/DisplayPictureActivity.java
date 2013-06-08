@@ -1,7 +1,7 @@
 package com.example.icreatesecretproject;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
 
 public class DisplayPictureActivity extends Activity {
@@ -18,5 +18,4 @@ public class DisplayPictureActivity extends Activity {
 		getMenuInflater().inflate(R.menu.display_picture, menu);
 		return true;
 	}
-
 }
