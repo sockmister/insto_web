@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="menu_items">
+        <item>Check Places</item>
+        <item>Help a Soul</item>
+        <item>My Request</item>
+    </string-array>
+    
+    <string-array name="locations">
+        <item>Arts and Social Science</item>
+        <item>Business</item>
+        <item>Computing</item>
+        <item>Engineering</item>
+        <item>Medicine</item>
+        <item>Science</item>
+        <item>SDE</item>
+        <item>Utown</item>
+    </string-array>
+</resources>
