@@ -24,3 +24,23 @@ local.properties
 
 # PDT-specific
 .buildpath
+
+*.rbc
+*.sassc
+.sass-cache
+capybara-*.html
+.rspec
+.rvmrc
+insto-web/.bundle
+insto-web/vendor/bundle
+insto-web/log/*
+insto-web/tmp/*
+insto-web/db/*.sqlite3
+insto-web/public/system/*
+insto-web/coverage/
+insto-web/spec/tmp/*
+**.orig
+rerun.txt
+pickle-email-*.html
+.project
+
