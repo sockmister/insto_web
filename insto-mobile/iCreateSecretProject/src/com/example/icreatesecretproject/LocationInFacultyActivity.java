@@ -32,14 +32,14 @@ public class LocationInFacultyActivity extends Activity {
 	}
 
 	public void getLocationPlaces() {
-		String url = "penbites.info.tm/location/soc";
+		String url = "http://penbites.info.tm/location/soc";
 		Log.i("LOCATION IN FACULTY ACTION)", "enter");
 		aq.ajax(url, JSONArray.class, this, "jsonCallback");
 
 	}
 
 	public void jsonCallback(String url, JSONArray json, AjaxStatus status) {
-		Log.i("LOCATION IN FACULTY ACTION", url);
+		Log.i("LOCATION IN FACULTY ACTION", url + " " + status.getCode());
 		TextView tv = (TextView) findViewById(R.id.text_view);
 		tv.setText(json.toString());
 		// if(json != null){
