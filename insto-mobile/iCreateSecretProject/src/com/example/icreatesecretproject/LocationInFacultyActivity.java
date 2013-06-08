@@ -34,7 +34,7 @@ public class LocationInFacultyActivity extends Activity {
 	public void getLocationPlaces() {
 		String url = "penbites.info.tm/location/soc";
 		Log.i("LOCATION IN FACULTY ACTION)", "enter");
-		aq.ajax(url, JSONArray.class, getBaseContext(), "jsonCallback");
+		aq.ajax(url, JSONArray.class, this, "jsonCallback");
 
 	}
 
