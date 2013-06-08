@@ -1,6 +1,0 @@
-INDEX VERSION 1.126+C:\Users\bearjew\Desktop\iCreate_Insto\insto_web\insto-web\.metadata\.plugins\org.eclipse.jdt.core
-1122178717.index
-3571150417.index
-587188171.index
-3753445075.index
-2976849568.index

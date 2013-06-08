@@ -151,51 +151,56 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int p_utown=0x7f02000b;
     }
     public static final class id {
-        public static final int action_settings=0x7f040018;
-        public static final int button_send_photo=0x7f04000c;
-        public static final int button_take_photo=0x7f04000b;
-        public static final int contact_label=0x7f040007;
-        public static final int dashboard_frame=0x7f040006;
+        public static final int action_settings=0x7f040019;
+        public static final int button_send_photo=0x7f04000d;
+        public static final int button_take_photo=0x7f04000c;
+        public static final int contact_label=0x7f040008;
+        public static final int dashboard_frame=0x7f040007;
         public static final int fullscreen=0x7f040003;
-        public static final int gridview=0x7f040005;
-        public static final int image=0x7f040012;
-        public static final int imageView=0x7f040015;
-        public static final int label=0x7f040010;
+        public static final int gridview=0x7f040006;
+        public static final int image=0x7f040013;
+        public static final int imageView=0x7f040016;
+        public static final int label=0x7f040011;
         public static final int left=0x7f040000;
-        public static final int logo=0x7f04000f;
+        public static final int logo=0x7f040010;
         public static final int margin=0x7f040002;
-        public static final int menu_frame=0x7f040016;
-        public static final int menu_frame2=0x7f040013;
-        public static final int menu_profile=0x7f040014;
-        public static final int pager_title_strip=0x7f040009;
-        public static final int preview=0x7f04000a;
+        public static final int menu_frame=0x7f040017;
+        public static final int menu_frame2=0x7f040014;
+        public static final int menu_profile=0x7f040015;
+        public static final int pager_title_strip=0x7f04000a;
+        public static final int preview=0x7f04000b;
         public static final int right=0x7f040001;
-        public static final int section_label=0x7f040011;
+        public static final int section_label=0x7f040012;
         public static final int selected_view=0x7f040004;
-        public static final int slidingmenumain=0x7f040017;
-        public static final int spinner1=0x7f04000d;
-        public static final int spinner2=0x7f04000e;
-        public static final int viewpager=0x7f040008;
+        public static final int slidingmenumain=0x7f040018;
+        public static final int spinner1=0x7f04000e;
+        public static final int spinner2=0x7f04000f;
+        public static final int text_view=0x7f040005;
+        public static final int viewpager=0x7f040009;
     }
     public static final class layout {
         public static final int activity_display_picture=0x7f030000;
-        public static final int activity_location_list=0x7f030001;
-        public static final int activity_main=0x7f030002;
-        public static final int activity_take_photo=0x7f030003;
-        public static final int dialog_select_photo_location=0x7f030004;
-        public static final int fragment_check_places_list=0x7f030005;
-        public static final int fragment_main_dummy=0x7f030006;
-        public static final int fragment_request_apic=0x7f030007;
-        public static final int fragment_take_apic=0x7f030008;
-        public static final int location_grid=0x7f030009;
-        public static final int menu_frame=0x7f03000a;
-        public static final int slidingmenumain=0x7f03000b;
+        public static final int activity_location_in_faculty=0x7f030001;
+        public static final int activity_location_list=0x7f030002;
+        public static final int activity_main=0x7f030003;
+        public static final int activity_my_request=0x7f030004;
+        public static final int activity_take_photo=0x7f030005;
+        public static final int dialog_select_photo_location=0x7f030006;
+        public static final int fragment_check_places_list=0x7f030007;
+        public static final int fragment_main_dummy=0x7f030008;
+        public static final int fragment_request_apic=0x7f030009;
+        public static final int fragment_take_apic=0x7f03000a;
+        public static final int location_grid=0x7f03000b;
+        public static final int menu_frame=0x7f03000c;
+        public static final int slidingmenumain=0x7f03000d;
     }
     public static final class menu {
         public static final int display_picture=0x7f090000;
-        public static final int location_list=0x7f090001;
-        public static final int main=0x7f090002;
-        public static final int take_photo=0x7f090003;
+        public static final int location_in_faculty=0x7f090001;
+        public static final int location_list=0x7f090002;
+        public static final int main=0x7f090003;
+        public static final int my_request=0x7f090004;
+        public static final int take_photo=0x7f090005;
     }
     public static final class string {
         public static final int action_settings=0x7f070001;
@@ -205,7 +210,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int location_prompt=0x7f07000b;
         public static final int test_string=0x7f070005;
         public static final int title_activity_display_picture=0x7f070007;
+        public static final int title_activity_location_in_faculty=0x7f07000c;
         public static final int title_activity_location_list=0x7f070009;
+        public static final int title_activity_my_request=0x7f07000d;
         public static final int title_activity_take_photo=0x7f07000a;
         public static final int title_section1=0x7f070002;
         public static final int title_section2=0x7f070003;
