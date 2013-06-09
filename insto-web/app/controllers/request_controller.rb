@@ -1,6 +1,20 @@
 class RequestController < ApplicationController
-	# def index
-	# end
+	before_filter :get_parent
+
+	def get_parent
+		if params[:user_id]
+      @parent = User.find(params[:user_id])
+    elsif params[:location_id]
+      @parent = Location.find(params[:location_id])
+    else
+      # handle this case however is appropriate to your application...
+    end
+	end
+
+	def index
+		@request = @parent
+		render :json => @request
+	end
 
 	# only for testing
 	def new
@@ -26,8 +40,8 @@ class RequestController < ApplicationController
 		end
 	end
 
-	# def show
-	# end
+	def show
+	end
 
 	# def edit
 	# end
