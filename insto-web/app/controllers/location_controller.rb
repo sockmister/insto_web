@@ -25,4 +25,10 @@ class LocationController < ApplicationController
 
 	# def destroy
 	# end	
+
+	# Get submissions of 
+	# URL: /location/location_submissions/:id
+	def location_submissions
+		
+	end
 end
