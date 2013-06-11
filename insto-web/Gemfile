@@ -44,5 +44,3 @@ gem 'jquery-rails'
 gem 'paperclip'
 # Simple application server
 gem 'thin' 
-# For easy resources handling
-gem 'inherited_resources'
