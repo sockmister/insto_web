@@ -20,7 +20,7 @@ class SubmissionController < ApplicationController
 		# respond_to :json
 		@submission = Submission.new(params[:submission])
 		if @submission.save
-			render :json => @submission
+			render :json => @submission, :methods => "image_url"
 		end
 		# respond_to :json
 		# @submission = Submission.new
