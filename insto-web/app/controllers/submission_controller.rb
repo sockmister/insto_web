@@ -18,18 +18,18 @@ class SubmissionController < ApplicationController
 
 	def create
 		# respond_to :json
-		# @submission = Submission.new(params[:submission])
-		# if @submission.save
-		# 	render :json => @submission
-		# end
-		respond_to :json
-		@submission = Submission.new
-		@submission.location_id = params[:location_id]
-		@submission.user_id = params[:user_id]
-		@submission.image = params[:image]
+		@submission = Submission.new(params[:submission])
 		if @submission.save
 			render :json => @submission
 		end
+		# respond_to :json
+		# @submission = Submission.new
+		# @submission.location_id = params[:location_id]
+		# @submission.user_id = params[:user_id]
+		# @submission.image = params[:image]
+		# if @submission.save
+		# 	render :json => @submission
+		# end
 	end
 end
 
