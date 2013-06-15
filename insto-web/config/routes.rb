@@ -1,16 +1,17 @@
 Insto::Application.routes.draw do
 
-  resources :location, :user
+  resources :location, :user, :submission
 
-  # user has many requests
+  # user has many requests and submissions
   resources :user do
     resources :request
     resources :submission
   end
 
-  # location has many requests
+  # location has many requests and submissions
   resources :location do
     resources :request
+    resources :submission
   end
 
   # custom action for /request/top
