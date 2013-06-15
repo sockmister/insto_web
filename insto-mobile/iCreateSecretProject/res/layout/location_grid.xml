@@ -2,25 +2,37 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+	    android:paddingLeft="2dp"
+	    android:paddingRight="2dp">
     
     <ImageView
         android:id="@+id/image"
-         android:layout_width="350dp"
-	    android:layout_height="200dp"
+        android:layout_width="250dp"
+	    android:layout_height="150dp"
 	    android:scaleType="centerCrop"/>
     
-    <RelativeLayout 
+    <LinearLayout  
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/image">
+        android:orientation="horizontal">
         
         <TextView
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:hint="hello world" />
-        
-    </RelativeLayout>
+        	android:id="@+id/name"
+        	android:layout_weight="1"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:paddingLeft="2dp"
+		    android:textSize="18sp"
+		    android:hint="hello world" />
+	        
+        <TextView
+        	android:id="@+id/count"
+        	android:layout_weight="5"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:hint="1" />
+    </LinearLayout >
     
 	
 

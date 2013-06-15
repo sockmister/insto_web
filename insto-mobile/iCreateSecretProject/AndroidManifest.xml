@@ -33,7 +33,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.example.icreatesecretproject.LocationGridActivity"
+            android:name="com.example.icreatesecretproject.LocationGrid.LocationGridActivity"
             android:label="@string/title_activity_location_list"
             android:screenOrientation="portrait" >
         </activity>
@@ -48,12 +48,16 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.example.icreatesecretproject.LocationInFacultyActivity"
+            android:name="com.example.icreatesecretproject.LocationGrid.LocationInFacultyActivity"
             android:label="@string/title_activity_location_in_faculty" >
         </activity>
         <activity
             android:name="com.example.icreatesecretproject.MyRequestActivity"
             android:label="@string/title_activity_my_request" >
+        </activity>
+        <activity
+            android:name="com.example.icreatesecretproject.LocationGrid.LocationDisplayInformationActivity"
+            android:label="@string/title_activity_location_display_information" >
         </activity>
     </application>
 

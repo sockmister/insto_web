@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.icreatesecretproject.LocationGrid.LocationGridActivity;
 import com.example.icreatesecretproject.TakePhoto.TakePhotoActivity;
 
 public class MainMenuFragment extends ListFragment {
