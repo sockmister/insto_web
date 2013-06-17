@@ -35,7 +35,9 @@ public class LocationInFacultyActivity extends Activity {
 
 				Intent intent = new Intent(getBaseContext(),
 						LocationDisplayInformationActivity.class);
-				// intent.putExtra("id", )t
+				intent.putExtra("facultyId",
+						getIntent().getIntExtra("facultyId", 0));
+				intent.putExtra("locationId", position);
 				startActivity(intent);
 				// Toast.makeText(LocationGridActivity.this, "" + position,
 				// Toast.LENGTH_SHORT).show();
@@ -52,7 +54,13 @@ public class LocationInFacultyActivity extends Activity {
 	}
 
 	public void getLocationPlaces() {
-		String url = "http://insto-web.herokuapp.com/location/soc";
+		Intent intent = getIntent();
+		int facultyId = intent.getIntExtra("facultyId", 0);
+		String[] location = { "fass", "business", "soc", "engineering",
+				"medicine", "science", "sde", "utown" };
+
+		String url = "http://insto-web.herokuapp.com/location/"
+				+ location[facultyId];
 		Log.i("LOCATION IN FACULTY ACTION)", "enter");
 		aq.ajax(url, JSONArray.class, this, "jsonCallback");
 

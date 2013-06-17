@@ -35,6 +35,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.icreatesecretproject.R;
 
@@ -44,6 +45,7 @@ public class TakePhotoActivity extends Activity {
 	Button sendAPicture;
 	File savedPictureFile;
 	HandlePictureStorage handPicStore;
+	Dialog dialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +96,7 @@ public class TakePhotoActivity extends Activity {
 				dialog.setContentView(R.layout.dialog_select_photo_location);
 				dialog.setTitle("Select Location");
 
-				Spinner spinnerFaculty = (Spinner) dialog
+				final Spinner spinnerFaculty = (Spinner) dialog
 						.findViewById(R.id.spinner_faculty);
 				ArrayAdapter<CharSequence> adapter = ArrayAdapter
 						.createFromResource(v.getContext(), R.array.locations,
@@ -104,7 +106,7 @@ public class TakePhotoActivity extends Activity {
 				// // Apply the adapter to the spinner
 				spinnerFaculty.setAdapter(adapter);
 
-				Spinner spinnerId = (Spinner) dialog
+				final Spinner spinnerId = (Spinner) dialog
 						.findViewById(R.id.spinner_id);
 				ArrayAdapter<CharSequence> adapterId = ArrayAdapter
 						.createFromResource(v.getContext(), R.array.arts_name,
@@ -187,12 +189,30 @@ public class TakePhotoActivity extends Activity {
 
 						});
 
+				Button send_button = (Button) dialog
+						.findViewById(R.id.send_button);
+				send_button.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View arg0) {
+						// TODO Auto-generated method stub
+						savedPictureFile = handPicStore.getPictureFile();
+
+						int location_id = (spinnerFaculty
+								.getSelectedItemPosition() * 10)
+								+ (spinnerId.getSelectedItemPosition());
+						new POSTMultipart(savedPictureFile, Integer
+								.toString(location_id), dialog).execute();
+					}
+
+				});
+
 				dialog.show();
-				// savedPictureFile = handPicStore.getPictureFile();
+				//
 				// Log.i("TakePhotoActivity - send picture", "sad");
 				// Log.i("TakePhotoActivity - send picture",
 				// savedPictureFile.toString());
-				// new POSTMultipart(savedPictureFile).execute();
+				//
 			}
 
 		});
@@ -216,13 +236,17 @@ public class TakePhotoActivity extends Activity {
 	private class POSTMultipart extends AsyncTask {
 		private Activity ac;
 		private File pic_file;
+		String locationId;
+		Dialog dialog;
 
 		public POSTMultipart(Activity ac) {
 			this.ac = ac;
 		}
 
-		public POSTMultipart(File pic_file) {
+		public POSTMultipart(File pic_file, String locationId, Dialog dialog) {
 			this.pic_file = pic_file;
+			this.locationId = locationId;
+			this.dialog = dialog;
 		}
 
 		@Override
@@ -251,7 +275,7 @@ public class TakePhotoActivity extends Activity {
 			StringBody gleam = null;
 			try {
 				user_id = new StringBody("1");
-				location_id = new StringBody("1");
+				location_id = new StringBody(locationId);
 			} catch (UnsupportedEncodingException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -293,6 +317,10 @@ public class TakePhotoActivity extends Activity {
 		@Override
 		protected void onPostExecute(Object reply) {
 			Log.i("TakePhotoActivity - reply", ((JSONObject) reply).toString());
+			if (dialog != null)
+				dialog.dismiss();
+			Toast.makeText(getApplicationContext(),
+					"Photo sent, MUTHER FUCKER!!!!", Toast.LENGTH_LONG).show();
 			// mImage.setVisibility(View.GONE);
 			// mButton.setVisibility(View.GONE);
 			// mText.setVisibility(View.VISIBLE);

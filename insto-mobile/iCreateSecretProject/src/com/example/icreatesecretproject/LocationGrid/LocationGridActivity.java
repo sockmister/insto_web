@@ -11,9 +11,6 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.example.icreatesecretproject.R;
-import com.example.icreatesecretproject.R.id;
-import com.example.icreatesecretproject.R.layout;
-import com.example.icreatesecretproject.R.menu;
 
 public class LocationGridActivity extends Activity {
 
@@ -30,6 +27,7 @@ public class LocationGridActivity extends Activity {
 					int position, long id) {
 				Intent intent = new Intent(getBaseContext(),
 						LocationInFacultyActivity.class);
+				intent.putExtra("facultyId", position);
 				startActivity(intent);
 				Toast.makeText(LocationGridActivity.this, "" + position,
 						Toast.LENGTH_SHORT).show();

@@ -178,7 +178,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class id {
         public static final int action_settings=0x7f040026;
-        public static final int button1=0x7f040011;
         public static final int button_send_photo=0x7f04000e;
         public static final int button_take_photo=0x7f04000d;
         public static final int camera_icon=0x7f040027;
@@ -209,6 +208,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int right=0x7f040001;
         public static final int section_label=0x7f040015;
         public static final int selected_view=0x7f040004;
+        public static final int send_button=0x7f040011;
         public static final int slidingmenumain=0x7f040025;
         public static final int spinner_faculty=0x7f04000f;
         public static final int spinner_id=0x7f040010;

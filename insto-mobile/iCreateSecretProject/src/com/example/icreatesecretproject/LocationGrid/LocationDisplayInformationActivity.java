@@ -3,6 +3,7 @@ package com.example.icreatesecretproject.LocationGrid;
 import org.json.JSONArray;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -24,7 +25,10 @@ public class LocationDisplayInformationActivity extends Activity {
 		aq = new AQuery(this);
 		// lv = (ListView) findViewById(R.id.list_view);
 		// lv.setAdapter(new LocationDisplayInformationAdapter(this, null));
-		getImages();
+		Intent intent = getIntent();
+		int id = (intent.getIntExtra("facultyId", 0) * 10)
+				+ (intent.getIntExtra("locationId", 0));
+		getImages(id);
 	}
 
 	@Override
@@ -34,8 +38,9 @@ public class LocationDisplayInformationActivity extends Activity {
 		return true;
 	}
 
-	public void getImages() {
-		String url = "http://insto-web.herokuapp.com/location/1/submission";
+	public void getImages(int id) {
+		String url = "http://insto-web.herokuapp.com/location/" + id
+				+ "/submission";
 		Log.i("LOCATION IN FACULTY ACTION)", "enter");
 		aq.ajax(url, JSONArray.class, this, "jsonCallback");
 	}
