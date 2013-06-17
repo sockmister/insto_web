@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxStatus;
@@ -26,22 +25,23 @@ public class LocationInFacultyActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_location_in_faculty);
-
+		aq = new AQuery(this);
 		lv = (ListView) findViewById(R.id.list_view);
-		lv.setAdapter(new LocationInFacultyAdapter(this, null));
+		// lv.setAdapter(new LocationInFacultyAdapter(this, null));
 
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View v,
 					int position, long id) {
+
 				Intent intent = new Intent(getBaseContext(),
 						LocationDisplayInformationActivity.class);
+				// intent.putExtra("id", )t
 				startActivity(intent);
 				// Toast.makeText(LocationGridActivity.this, "" + position,
 				// Toast.LENGTH_SHORT).show();
 			}
 		});
-		// aq = new AQuery(this);
-		// getLocationPlaces();
+		getLocationPlaces();
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class LocationInFacultyActivity extends Activity {
 	}
 
 	public void getLocationPlaces() {
-		String url = "http://penbites.info.tm/location/soc";
+		String url = "http://insto-web.herokuapp.com/location/soc";
 		Log.i("LOCATION IN FACULTY ACTION)", "enter");
 		aq.ajax(url, JSONArray.class, this, "jsonCallback");
 
@@ -61,8 +61,8 @@ public class LocationInFacultyActivity extends Activity {
 	public void jsonCallback(String url, JSONArray json, AjaxStatus status) {
 		Log.i("LOCATION IN FACULTY ACTION", url + " " + status.getCode());
 		System.out.println(json);
-		TextView tv = (TextView) findViewById(R.id.text_view);
-		tv.setText(json.toString());
+		// TextView tv = (TextView) findViewById(R.id.text_view);
+		// tv.setText(json.toString());
 
 		lv = (ListView) findViewById(R.id.list_view);
 		lv.setAdapter(new LocationInFacultyAdapter(this, json));

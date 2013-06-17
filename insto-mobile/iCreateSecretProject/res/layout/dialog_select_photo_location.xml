@@ -5,18 +5,25 @@
     android:orientation="vertical" >
     
  <Spinner
-        android:id="@+id/spinner1"
+        android:id="@+id/spinner_faculty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/locations"
-        android:prompt="@string/location_prompt" />
- 
-    <Spinner
-        android:id="@+id/spinner2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:entries="@array/locations"
-        android:prompt="@string/location_prompt" />
-    
+        android:prompt="@string/location_prompt" 
+        android:paddingBottom="10dp"/>
+
+ <Spinner
+     android:id="@+id/spinner_id"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:entries="@array/locations"
+     android:prompt="@string/location_prompt" 
+     android:paddingBottom="10dp"/>
+
+ <Button
+     android:id="@+id/button1"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:text="Send" />
    
 </LinearLayout>

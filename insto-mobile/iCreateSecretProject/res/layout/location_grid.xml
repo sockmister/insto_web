@@ -33,7 +33,5 @@
 		    android:layout_height="wrap_content"
 		    android:hint="1" />
     </LinearLayout >
-    
-	
 
 </RelativeLayout>

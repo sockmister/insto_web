@@ -16,5 +16,6 @@
     <string name="title_activity_location_in_faculty">LocationInFacultyActivity</string>
     <string name="title_activity_my_request">MyRequestActivity</string>
     <string name="title_activity_location_display_information">LocationDisplayInformationActivity</string>
+    <string name="title_activity_check_others_request">CheckOthersRequestActivity</string>
 
 </resources>

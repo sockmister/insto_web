@@ -1,5 +1,8 @@
 package com.example.icreatesecretproject.LocationGrid;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,15 +14,17 @@ import android.widget.TextView;
 import com.androidquery.AQuery;
 import com.example.icreatesecretproject.R;
 
-public class LocationGridAdapter extends BaseAdapter {
+public class LocationDisplayInformationGridAdapter extends BaseAdapter {
 	private Context mContext;
+	JSONArray jArray;
 
-	public LocationGridAdapter(Context c) {
+	public LocationDisplayInformationGridAdapter(Context c, JSONArray jArray) {
 		mContext = c;
+		this.jArray = jArray;
 	}
 
 	public int getCount() {
-		return mThumbIds.length;
+		return jArray.length() - 1;
 	}
 
 	public Object getItem(int position) {
@@ -38,10 +43,19 @@ public class LocationGridAdapter extends BaseAdapter {
 		v = vi.inflate(R.layout.location_grid, null);
 		ImageView imageView;
 		imageView = (ImageView) v.findViewById(R.id.image);
-		imageView.setImageResource(mThumbIds[position]);
+
+		String url;
+		try {
+			url = jArray.getJSONObject(position + 1).getString("image_url");
+			AQuery aq = new AQuery(v);
+			aq.id(R.id.image).progress(R.id.progressBar)
+					.image(url, true, true, 200, 0);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		TextView tv = (TextView) v.findViewById(R.id.name);
-		tv.setText(mThumbIdsName[position]);
 		// if (convertView != null) { // if it's not recycled, initialize some
 		// // attributes
 		// // imageView = new ImageView(mContext);
@@ -51,21 +65,11 @@ public class LocationGridAdapter extends BaseAdapter {
 		// } else {
 		// imageView = (ImageView) convertView;
 		// }
-		AQuery aq = new AQuery(v.getContext());
-		aq.id(R.id.image).image(mThumbIds[position]);
+
 		// imageView.setImageResource(mThumbIds[position]);
 		return v;
 	}
 
 	// references to our images
-	private Integer[] mThumbIds = {
-			// R.drawable.head
-			R.drawable.o_arts, R.drawable.p_business, R.drawable.o_computing,
-			R.drawable.o_engineering, R.drawable.o_medicine,
-			R.drawable.o_science, R.drawable.o_sde, R.drawable.p_utown };
 
-	private String[] mThumbIdsName = {
-			// R.drawable.head
-			"Arts", "Business", "Computing", "Engineering", "Medicine",
-			"Science", "SDE", "UTown" };
 }

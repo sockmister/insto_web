@@ -25,14 +25,15 @@ public class LocationInFacultyAdapter extends BaseAdapter {
 
 	public LocationInFacultyAdapter(Context c, JSONArray locationArray) {
 		this.mContext = c;
-		// this.locationArray = locationArray;
-		String temp = "[{created_at:\"2013-05-31T09:39:58Z\",faculty:\"soc\",id:1,name:\"COM1-B1 Study Area\",updated_at:\"2013-05-31T09:39:58Z\"},{created_at:\"2013-05-31T09:40:42Z\",faculty:\"soc\",id:2,name:\"COM1 Level 2 Common Area\",updated_at:\"2013-05-31T09:40:42Z\"},{created_at:\"2013-05-31T09:41:07Z\",faculty:\"soc\",id:3,name:\"COM1 Level 1 Printer Area\",updated_at:\"2013-05-31T09:41:07Z\"},{created_at:\"2013-05-31T09:42:02Z\",faculty:\"soc\",id:4,name:\"COM1 Level 2 Tutorial Room Corridor\",updated_at:\"2013-05-31T09:42:02Z\"}]";
-		try {
-			this.locationArray = new JSONArray(temp);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.locationArray = locationArray;
+		// String temp =
+		// "[{created_at:\"2013-05-31T09:39:58Z\",faculty:\"soc\",id:1,name:\"COM1-B1 Study Area\",updated_at:\"2013-05-31T09:39:58Z\"},{created_at:\"2013-05-31T09:40:42Z\",faculty:\"soc\",id:2,name:\"COM1 Level 2 Common Area\",updated_at:\"2013-05-31T09:40:42Z\"},{created_at:\"2013-05-31T09:41:07Z\",faculty:\"soc\",id:3,name:\"COM1 Level 1 Printer Area\",updated_at:\"2013-05-31T09:41:07Z\"},{created_at:\"2013-05-31T09:42:02Z\",faculty:\"soc\",id:4,name:\"COM1 Level 2 Tutorial Room Corridor\",updated_at:\"2013-05-31T09:42:02Z\"}]";
+		// try {
+		// this.locationArray = new JSONArray(temp);
+		// } catch (JSONException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
 	}
 
 	@Override

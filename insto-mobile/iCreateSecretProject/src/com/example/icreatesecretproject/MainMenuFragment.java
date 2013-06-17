@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.icreatesecretproject.CheckOthersRequest.CheckOthersRequestActivity;
 import com.example.icreatesecretproject.LocationGrid.LocationGridActivity;
-import com.example.icreatesecretproject.TakePhoto.TakePhotoActivity;
 
 public class MainMenuFragment extends ListFragment {
 	private OnFragmentInteractionListener mListener;
@@ -58,7 +58,8 @@ public class MainMenuFragment extends ListFragment {
 			break;
 		// help a soul
 		case 1:
-			Intent intent1 = new Intent(getActivity(), TakePhotoActivity.class);
+			Intent intent1 = new Intent(getActivity(),
+					CheckOthersRequestActivity.class);
 			startActivity(intent1);
 			break;
 		// my request

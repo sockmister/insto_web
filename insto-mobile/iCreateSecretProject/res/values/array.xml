@@ -16,4 +16,212 @@
         <item>SDE</item>
         <item>Utown</item>
     </string-array>
+    
+    <string-array name="arts_name">
+        <item>Arts 0</item>
+        <item>Arts 1</item>
+        <item>Arts 2</item>
+        <item>Arts 3</item>
+        <item>Arts 4</item>
+        <item>Arts 5</item>
+        <item>Arts 6</item>
+        <item>Arts 7</item>
+        <item>Arts 8</item>
+        <item>Arts 9</item>
+    </string-array>
+    
+    <string-array name="arts_id">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
+    
+    <string-array name="business_name">
+        <item>Business 0</item>
+        <item>Business 1</item>
+        <item>Business 2</item>
+        <item>Business 3</item>
+        <item>Business 4</item>
+        <item>Business 5</item>
+        <item>Business 6</item>
+        <item>Business 7</item>
+        <item>Business 8</item>
+        <item>Business 9</item>
+    </string-array>
+    
+    <string-array name="business_id">
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+    </string-array>
+    
+    <string-array name="computing_name">
+        <item>Computing 0</item>
+        <item>Computing 1</item>
+        <item>Computing 2</item>
+        <item>Computing 3</item>
+        <item>Computing 4</item>
+        <item>Computing 5</item>
+        <item>Computing 6</item>
+        <item>Computing 7</item>
+        <item>Computing 8</item>
+        <item>Computing 9</item>
+    </string-array>
+    
+    <string-array name="computing_id">
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+    </string-array>
+    
+    <string-array name="engineering_name">
+        <item>Engineering 0</item>
+        <item>Engineering 1</item>
+        <item>Engineering 2</item>
+        <item>Engineering 3</item>
+        <item>Engineering 4</item>
+        <item>Engineering 5</item>
+        <item>Engineering 6</item>
+        <item>Engineering 7</item>
+        <item>Engineering 8</item>
+        <item>Engineering 9</item>
+    </string-array>
+    
+    <string-array name="engineering_id">
+       <item>30</item>
+        <item>31</item>
+        <item>32</item>
+        <item>33</item>
+        <item>34</item>
+        <item>35</item>
+        <item>36</item>
+        <item>37</item>
+        <item>38</item>
+        <item>39</item>
+    </string-array>
+    
+    <string-array name="medicine_name">
+        <item>Medicine 0</item>
+        <item>Medicine 1</item>
+        <item>Medicine 2</item>
+        <item>Medicine 3</item>
+        <item>Medicine 4</item>
+        <item>Medicine 5</item>
+        <item>Medicine 6</item>
+        <item>Medicine 7</item>
+        <item>Medicine 8</item>
+        <item>Medicine 9</item>
+    </string-array>
+    
+    <string-array name="medicine_id">
+        <item>40</item>
+        <item>41</item>
+        <item>42</item>
+        <item>43</item>
+        <item>44</item>
+        <item>45</item>
+        <item>46</item>
+        <item>47</item>
+        <item>48</item>
+        <item>49</item>
+    </string-array>
+    
+    <string-array name="science_name">
+        <item>Science 0</item>
+        <item>Science 1</item>
+        <item>Science 2</item>
+        <item>Science 3</item>
+        <item>Science 4</item>
+        <item>Science 5</item>
+        <item>Science 6</item>
+        <item>Science 7</item>
+        <item>Science 8</item>
+        <item>Science 9</item>
+    </string-array>
+    
+    <string-array name="science_id">
+        <item>50</item>
+        <item>51</item>
+        <item>52</item>
+        <item>53</item>
+        <item>54</item>
+        <item>55</item>
+        <item>56</item>
+        <item>57</item>
+        <item>58</item>
+        <item>59</item>
+    </string-array>
+    
+    <string-array name="sde_name">
+        <item>SDE 0</item>
+        <item>SDE 1</item>
+        <item>SDE 2</item>
+        <item>SDE 3</item>
+        <item>SDE 4</item>
+        <item>SDE 5</item>
+        <item>SDE 6</item>
+        <item>SDE 7</item>
+        <item>SDE 8</item>
+        <item>SDE 9</item>
+    </string-array>
+    
+    <string-array name="sde_id">
+        <item>60</item>
+        <item>61</item>
+        <item>62</item>
+        <item>63</item>
+        <item>64</item>
+        <item>65</item>
+        <item>66</item>
+        <item>67</item>
+        <item>68</item>
+        <item>69</item>
+    </string-array>
+    
+    <string-array name="utown_name">
+        <item>UTown 0</item>
+        <item>UTown 1</item>
+        <item>UTown 2</item>
+        <item>UTown 3</item>
+        <item>UTown 4</item>
+        <item>UTown 5</item>
+        <item>UTown 6</item>
+        <item>UTown 7</item>
+        <item>UTown 8</item>
+        <item>UTown 9</item>
+    </string-array>
+    
+    <string-array name="utown_id">
+        <item>70</item>
+        <item>71</item>
+        <item>72</item>
+        <item>73</item>
+        <item>74</item>
+        <item>75</item>
+        <item>76</item>
+        <item>77</item>
+        <item>78</item>
+        <item>79</item>
+    </string-array>
 </resources>

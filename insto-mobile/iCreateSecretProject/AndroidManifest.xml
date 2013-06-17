@@ -59,6 +59,10 @@
             android:name="com.example.icreatesecretproject.LocationGrid.LocationDisplayInformationActivity"
             android:label="@string/title_activity_location_display_information" >
         </activity>
+        <activity
+            android:name="com.example.icreatesecretproject.CheckOthersRequest.CheckOthersRequestActivity"
+            android:label="@string/title_activity_check_others_request" >
+        </activity>
     </application>
 
 </manifest>
