@@ -70,8 +70,17 @@ public class LoginActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		
+		if(isLogin() == true){
+			finish();
+			//call next activity
+			Intent intent = new Intent(LoginActivity.this,
+					MainActivity.class);
+			startActivity(intent);	
+		}
 		setContentView(R.layout.activity_login);
+		
+		
 
 		// Set up the login form.
 		mEmail = getIntent().getStringExtra(EXTRA_EMAIL);
@@ -328,5 +337,13 @@ public class LoginActivity extends Activity {
 		Editor edit = pref.edit();
 		edit.putString("USER_INFO", json.toString());
 		edit.commit();
+	}
+	
+	private boolean isLogin(){
+		SharedPreferences pref = this.getSharedPreferences("USER", 0);
+		if(pref.getString("USER_INFO", "").equals(""))
+			return false;
+		else
+			return true;
 	}
 }
