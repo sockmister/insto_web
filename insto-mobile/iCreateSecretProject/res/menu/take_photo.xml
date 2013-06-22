@@ -4,7 +4,7 @@
         android:id="@+id/camera_icon"
         android:orderInCategory="100"
         android:showAsAction="always"
-        android:icon="@drawable/camera_icon"
+        android:icon="@drawable/camera_icon_2"
         android:title="Take Picture"/>
 
 </menu>

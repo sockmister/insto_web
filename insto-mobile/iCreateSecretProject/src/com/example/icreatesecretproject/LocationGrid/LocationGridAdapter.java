@@ -60,9 +60,9 @@ public class LocationGridAdapter extends BaseAdapter {
 	// references to our images
 	private Integer[] mThumbIds = {
 			// R.drawable.head
-			R.drawable.o_arts, R.drawable.p_business, R.drawable.o_computing,
+			R.drawable.o_arts, R.drawable.o_business, R.drawable.o_computing,
 			R.drawable.o_engineering, R.drawable.o_medicine,
-			R.drawable.o_science, R.drawable.o_sde, R.drawable.p_utown };
+			R.drawable.o_science, R.drawable.o_sde, R.drawable.o_utown };
 
 	private String[] mThumbIdsName = {
 			// R.drawable.head

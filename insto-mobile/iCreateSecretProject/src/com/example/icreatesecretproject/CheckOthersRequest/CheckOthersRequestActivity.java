@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.Locale;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,18 +18,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxStatus;
+import com.example.icreatesecretproject.BaseActivity;
 import com.example.icreatesecretproject.MainMenuFragment;
 import com.example.icreatesecretproject.R;
 import com.example.icreatesecretproject.TakePhoto.TakePhotoActivity;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
-public class CheckOthersRequestActivity extends SlidingFragmentActivity {
+public class CheckOthersRequestActivity extends BaseActivity {
 
 	SectionsPagerAdapter mSectionsPagerAdapter;
 	ViewPager mViewPager;
@@ -57,7 +55,7 @@ public class CheckOthersRequestActivity extends SlidingFragmentActivity {
 				.replace(R.id.menu_frame, new MainMenuFragment()).commit();
 		setSlidingActionBarEnabled(true);
 
-		ImageView imageView = (ImageView) findViewById(R.id.imageView);
+		// ImageView imageView = (ImageView) findViewById(R.id.imageView);
 		URL url;
 		// try {
 		// url = new
@@ -77,12 +75,13 @@ public class CheckOthersRequestActivity extends SlidingFragmentActivity {
 		// Uri.parse("http://image10.bizrate-images.com/resize?sq=60&uid=2216744464");
 		// imageView.setImageURI(imageuri);
 		AQuery aq = new AQuery(this);
-		aq.id(R.id.imageView)
-				.image("http://www.nus.edu.sg/identity/logo/images/nus-hlogo-color.gif");
-		aq.ajax("http://www.google.com", String.class, this, "callback");
+		// aq.id(R.id.imageView)
+		// .image("http://www.nus.edu.sg/identity/logo/images/nus-hlogo-color.gif");
+		// aq.ajax("http://www.google.com", String.class, this, "callback");
 
-		mSectionsPagerAdapter = new SectionsPagerAdapter(
-				getSupportFragmentManager());
+		// mSectionsPagerAdapter = new SectionsPagerAdapter(
+		// getSupportFragmentManager());
+		getRequestCount();
 
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -111,6 +110,34 @@ public class CheckOthersRequestActivity extends SlidingFragmentActivity {
 		// .setText(mSectionsPagerAdapter.getPageTitle(i))
 		// .setTabListener(this));
 		// }
+	}
+
+	public void getRequestCount() {
+		Intent intent = getIntent();
+		int facultyId = intent.getIntExtra("facultyId", 0);
+		String[] location = { "fass", "business", "soc", "engineering",
+				"medicine", "science", "sde", "utown" };
+
+		String url = "http://insto-web.herokuapp.com/request/all";
+		Log.i("LOCATION IN FACULTY ACTION)", "enter");
+		AQuery aq = new AQuery(this);
+		aq.ajax(url, JSONArray.class, this, "jsonCallback");
+
+	}
+
+	public void jsonCallback(String url, JSONArray json, AjaxStatus status) {
+		Log.i("LOCATION IN FACULTY ACTION", url + " " + status.getCode());
+		System.out.println(json);
+		// TextView tv = (TextView) findViewById(R.id.text_view);
+		// tv.setText(json.toString());
+
+		mSectionsPagerAdapter = new SectionsPagerAdapter(
+				getSupportFragmentManager(), json);
+		mViewPager = (ViewPager) findViewById(R.id.viewpager);
+		Log.i("CHECK OTHER REQUEST - before", " yo");
+		mViewPager.setAdapter(mSectionsPagerAdapter);
+		Log.i("CHECK OTHER REQUEST - after", " yo");
+
 	}
 
 	public void callback(String url, String str, AjaxStatus status) {
@@ -148,8 +175,23 @@ public class CheckOthersRequestActivity extends SlidingFragmentActivity {
 
 	public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
+		JSONArray ja;
+
 		public SectionsPagerAdapter(FragmentManager fm) {
 			super(fm);
+			String testArray = "[[{\"count\":\"10\",\"faculty\":\"soc\",\"location_id\":1,\"location_name\":\"COM1-B1 Study Area\"},{\"count\":\"2\",\"faculty\":\"soc\",\"location_id\":2,\"location_name\":\"COM1 Level 2 Common Area\"},{\"count\":\"2\",\"faculty\":\"soc\",\"location_id\":3,\"location_name\":\"COM1 Level 1 Printer Area\"},{\"count\":\"0\",\"faculty\":\"soc\",\"location_id\":4,\"location_name\":\"COM1 Level 2 Tutorial Room Corridor\"}]]";
+
+			try {
+				ja = new JSONArray(testArray);
+				// ja = temp.getJSONArray(0);
+			} catch (Exception e) {
+
+			}
+		}
+
+		public SectionsPagerAdapter(FragmentManager fm, JSONArray ja) {
+			super(fm);
+			this.ja = ja;
 		}
 
 		@Override
@@ -158,15 +200,15 @@ public class CheckOthersRequestActivity extends SlidingFragmentActivity {
 			// Return a DummySectionFragment (defined as a static inner class
 			// below) with the page number as its lone argument.
 
-			String testArray = "[[{\"count\":\"0\",\"faculty\":\"biz\",\"location_id\":5,\"location_name\":\"Aquarium\"},{\"count\":\"0\",\"faculty\":\"biz\",\"location_id\":6,\"location_name\":\"Fish Tank\"},{\"count\":\"0\",\"faculty\":\"biz\",\"location_id\":7,\"location_name\":\"Mochtar Riady Building\"},{\"count\":\"0\",\"faculty\":\"biz\",\"location_id\":8,\"location_name\":\"Biz Corridor\"}],[{\"count\":\"10\",\"faculty\":\"soc\",\"location_id\":1,\"location_name\":\"COM1-B1 Study Area\"},{\"count\":\"2\",\"faculty\":\"soc\",\"location_id\":2,\"location_name\":\"COM1 Level 2 Common Area\"},{\"count\":\"2\",\"faculty\":\"soc\",\"location_id\":3,\"location_name\":\"COM1 Level 1 Printer Area\"},{\"count\":\"0\",\"faculty\":\"soc\",\"location_id\":4,\"location_name\":\"COM1 Level 2 Tutorial Room Corridor\"}]]";
-
 			try {
-				JSONArray ja = new JSONArray(testArray);
-				JSONArray temp = ja.getJSONArray(0);
-				Log.i("CHECK OTHER REQUEST - get ITEM", temp.toString());
-				Fragment fragment = new CheckOtherRequestFragments(temp);
+
+				Log.i("CHECK OTHER REQUEST - get ITEM", ja.toString());
+				Log.i("CHECK OTHER REQUEST - get ITEM obj", ja.getJSONArray(0)
+						.toString());
+				Fragment fragment = new CheckOtherRequestFragments(
+						ja.getJSONArray(0));
 				return fragment;
-			} catch (JSONException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

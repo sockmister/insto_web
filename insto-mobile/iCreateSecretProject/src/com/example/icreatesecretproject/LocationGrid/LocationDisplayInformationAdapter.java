@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.androidquery.AQuery;
@@ -40,8 +39,8 @@ public class LocationDisplayInformationAdapter extends BaseAdapter {
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		// return picturesArray.length();
-		return 1;
+		return picturesArray.length();
+		// return 1;
 	}
 
 	@Override
@@ -71,9 +70,10 @@ public class LocationDisplayInformationAdapter extends BaseAdapter {
 
 		String url;
 		try {
-			JSONObject jo = picturesArray.getJSONObject(0);
+			JSONObject jo = picturesArray.getJSONObject(position);
 			Log.i("LOCATION DISPLAY ADPTER _ OBJECTL", jo.toString());
-			url = picturesArray.getJSONObject(0).getString("image_url");
+			// url = picturesArray.getJSONObject(0).getString("image_url");
+			url = jo.getString("image_url");
 			Log.i("LOCATION DISPLAY ADPTER _ URL", url);
 			AQuery aq = new AQuery(v);
 			aq.id(R.id.image).progress(R.id.progressBar)
@@ -84,21 +84,17 @@ public class LocationDisplayInformationAdapter extends BaseAdapter {
 			e.printStackTrace();
 		}
 
-		GridView gridView;
-		gridView = (GridView) v.findViewById(R.id.gridview);
+		// GridView gridView;
+		// gridView = (GridView) v.findViewById(R.id.gridview);
+		// gridView.setAdapter(new LocationDisplayInformationGridAdapter(v
+		// .getContext(), picturesArray));
+		// ViewGroup.LayoutParams layoutParams = gridView.getLayoutParams();
+		// layoutParams.height = convertDpToPixels(450, v.getContext()); // this
+		// is
+		// // in
+		// // pixels
+		// gridView.setLayoutParams(layoutParams);
 
-		// ArrayAdapter<String> adapter = new
-		// ArrayAdapter<String>(v.getContext(),
-		// android.R.layout.simple_list_item_1, numbers);
-
-		gridView.setAdapter(new LocationDisplayInformationGridAdapter(v
-				.getContext(), picturesArray));
-
-		ViewGroup.LayoutParams layoutParams = gridView.getLayoutParams();
-		layoutParams.height = convertDpToPixels(450, v.getContext()); // this is
-																		// in
-																		// pixels
-		gridView.setLayoutParams(layoutParams);
 		// TextView name = (TextView) v.findViewById(R.id.location_name);
 		// try {
 		// JSONObject jo = (JSONObject) locationArray.get(position);
@@ -108,7 +104,6 @@ public class LocationDisplayInformationAdapter extends BaseAdapter {
 		// // TODO Auto-generated catch block
 		// e.printStackTrace();
 		// }
-
 		return v;
 	}
 
@@ -118,9 +113,4 @@ public class LocationDisplayInformationAdapter extends BaseAdapter {
 				resources.getDisplayMetrics());
 	}
 
-	private Integer[] mThumbIds = {
-			// R.drawable.head
-			R.drawable.p_arts, R.drawable.p_business, R.drawable.p_computing,
-			R.drawable.p_engineering, R.drawable.p_medicine,
-			R.drawable.p_science, R.drawable.p_sde, R.drawable.p_utown };
 }

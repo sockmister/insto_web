@@ -21,11 +21,6 @@
             android:name="com.example.icreatesecretproject.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.example.icreatesecretproject.DisplayPictureActivity"
@@ -62,6 +57,20 @@
         <activity
             android:name="com.example.icreatesecretproject.CheckOthersRequest.CheckOthersRequestActivity"
             android:label="@string/title_activity_check_others_request" >
+        </activity>
+        <activity
+            android:name="com.example.icreatesecretproject.BaseActivity"
+            android:label="@string/title_activity_base" >
+        </activity>
+        <activity
+            android:name="com.example.icreatesecretproject.Login.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:windowSoftInputMode="adjustResize|stateVisible" 
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

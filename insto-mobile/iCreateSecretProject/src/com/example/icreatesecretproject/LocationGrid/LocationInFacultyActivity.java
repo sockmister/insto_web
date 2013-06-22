@@ -39,6 +39,8 @@ public class LocationInFacultyActivity extends Activity {
 						getIntent().getIntExtra("facultyId", 0));
 				intent.putExtra("locationId", position);
 				startActivity(intent);
+				overridePendingTransition(R.anim.from_out_slide_left,
+						R.anim.from_in_slide_left);
 				// Toast.makeText(LocationGridActivity.this, "" + position,
 				// Toast.LENGTH_SHORT).show();
 			}

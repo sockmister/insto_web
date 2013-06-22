@@ -9,8 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/locations"
-        android:prompt="@string/location_prompt" 
-        android:paddingBottom="10dp"/>
+        android:prompt="@string/location_prompt"
+        android:paddingTop="20dp" 
+        android:paddingBottom="20dp"/>
 
  <Spinner
      android:id="@+id/spinner_id"
@@ -18,12 +19,22 @@
      android:layout_height="wrap_content"
      android:entries="@array/locations"
      android:prompt="@string/location_prompt" 
-     android:paddingBottom="10dp"/>
+     android:paddingTop="20dp" 
+     android:paddingBottom="20dp"/>
 
- <Button
-     android:id="@+id/send_button"
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content"
-     android:text="Send" />
+  <Button
+       android:id="@+id/send_button"
+       android:layout_width="match_parent"
+       android:layout_height="55dp"
+       android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+       android:layout_below="@+id/loginPassword"
+       android:layout_marginTop="5dp"
+       android:background="@drawable/btn_orange"
+       android:fontFamily="HelveticaNeue-CondensedBold.ttf"
+       android:text="Send Photo"
+       android:textColor="@color/color_wizard_white"
+       android:textSize="20sp"
+       android:textStyle="bold" />
    
 </LinearLayout>

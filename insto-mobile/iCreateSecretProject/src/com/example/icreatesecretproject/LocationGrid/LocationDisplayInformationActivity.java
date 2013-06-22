@@ -1,12 +1,19 @@
 package com.example.icreatesecretproject.LocationGrid;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.androidquery.AQuery;
@@ -16,6 +23,7 @@ import com.example.icreatesecretproject.R;
 public class LocationDisplayInformationActivity extends Activity {
 	AQuery aq;
 	ListView lv;
+	JSONArray jsonArray;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +37,29 @@ public class LocationDisplayInformationActivity extends Activity {
 		int id = (intent.getIntExtra("facultyId", 0) * 10)
 				+ (intent.getIntExtra("locationId", 0));
 		getImages(id);
+
+		lv = (ListView) findViewById(R.id.list_view);
+	}
+
+	protected void showPictureDetails(View v, int position) {
+		final Dialog dialog = new Dialog(v.getContext());
+		dialog.setContentView(R.layout.dialog_location_info);
+		dialog.setTitle("Picture Information");
+
+		ImageView iv = (ImageView) dialog.findViewById(R.id.image);
+		AQuery aq = new AQuery(v.getContext());
+
+		JSONObject jo;
+		try {
+			jo = jsonArray.getJSONObject(position);
+			aq.id(iv).image(jo.getString("image_url"), true, true, 600, 0);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		dialog.show();
+
 	}
 
 	@Override
@@ -51,9 +82,17 @@ public class LocationDisplayInformationActivity extends Activity {
 		System.out.println(json);
 		// TextView tv = (TextView) findViewById(R.id.text_view);
 		// tv.setText(json.toString());
-
-		lv = (ListView) findViewById(R.id.list_view);
+		jsonArray = json;
 		lv.setAdapter(new LocationDisplayInformationAdapter(this, json));
+		lv.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View v,
+					int position, long id) {
+				showPictureDetails(v, position);
+			}
+
+		});
 		// if(json != null){
 		// //successful ajax call
 		// TextView tv = (TextView) findViewById(R.id.text_view);

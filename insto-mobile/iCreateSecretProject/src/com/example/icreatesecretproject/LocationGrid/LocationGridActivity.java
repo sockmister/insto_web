@@ -1,6 +1,5 @@
 package com.example.icreatesecretproject.LocationGrid;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,12 +9,13 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.example.icreatesecretproject.BaseActivity;
 import com.example.icreatesecretproject.R;
 
-public class LocationGridActivity extends Activity {
+public class LocationGridActivity extends BaseActivity {
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_location_list);
 
@@ -29,6 +29,8 @@ public class LocationGridActivity extends Activity {
 						LocationInFacultyActivity.class);
 				intent.putExtra("facultyId", position);
 				startActivity(intent);
+				overridePendingTransition(R.anim.from_out_slide_left,
+						R.anim.from_in_slide_left);
 				Toast.makeText(LocationGridActivity.this, "" + position,
 						Toast.LENGTH_SHORT).show();
 			}

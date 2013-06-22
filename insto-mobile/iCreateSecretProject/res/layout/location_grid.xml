@@ -1,37 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical" 
-	    android:paddingLeft="2dp"
-	    android:paddingRight="2dp">
-    
+    android:layout_height="match_parent"
+    android:paddingLeft="2dp"
+    android:paddingRight="2dp" 
+    android:background="@color/color_grid_grey">
+
     <ImageView
         android:id="@+id/image"
-        android:layout_width="250dp"
-	    android:layout_height="150dp"
-	    android:scaleType="centerCrop"/>
-    
-    <LinearLayout  
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        
+		android:layout_below="@+id/image"
+        android:layout_alignParentRight="true"
+        android:orientation="horizontal" >
+
+        <TextView 
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="hello world"
+            android:paddingLeft="2dp"
+            android:fontFamily="HelveticaNeue-CondensedBold.ttf"
+            android:textSize="26sp" 
+            android:textStyle="bold"
+            android:gravity="center"/>
+
         <TextView
-        	android:id="@+id/name"
-        	android:layout_weight="1"
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
-		    android:paddingLeft="2dp"
-		    android:textSize="18sp"
-		    android:hint="hello world" />
-	        
-        <TextView
-        	android:id="@+id/count"
-        	android:layout_weight="5"
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
-		    android:hint="1" />
-    </LinearLayout >
+            android:id="@+id/count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:hint="1" 
+            android:visibility="gone"/>
+    </LinearLayout>
 
 </RelativeLayout>

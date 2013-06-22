@@ -14,16 +14,35 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/button_take_photo"/>
 
-  <Button
-        android:id="@+id/button_take_photo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+  
+   <Button
+
+       android:id="@+id/button_take_photo"
+       android:layout_width="match_parent"
+       android:layout_height="55dp"
+       android:layout_alignParentRight="true"
        android:layout_above="@+id/button_send_photo"
-        android:text="Capture"/>
-  <Button
-        android:id="@+id/button_send_photo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+       android:layout_marginTop="5dp"
+       android:background="@drawable/btn_orange"
+       android:fontFamily="HelveticaNeue-CondensedBold.ttf"
+       android:text="Capture"
+       android:textColor="@color/color_wizard_white"
+       android:textSize="20sp"
+       android:textStyle="bold" />
+   
+   <Button
+       android:id="@+id/button_send_photo"
+       android:layout_width="match_parent"
+       android:layout_height="55dp"
+       android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:text="Send Photo"/>
+       android:layout_below="@+id/loginPassword"
+       android:layout_marginTop="5dp"
+       android:background="@drawable/btn_orange"
+       android:fontFamily="HelveticaNeue-CondensedBold.ttf"
+       android:text="Send Photo"
+       android:textColor="@color/color_wizard_white"
+       android:textSize="20sp"
+       android:textStyle="bold" />
+
 </RelativeLayout>
