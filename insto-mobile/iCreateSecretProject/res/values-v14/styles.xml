@@ -11,7 +11,7 @@
     </style>
 
     <style name="ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
-	    <item name="android:icon">@drawable/camera_icon_2</item>
+	    <item name="android:icon">@drawable/icon_camera_2</item>
 	    <item name="android:background">@color/nus_orange</item>
     	<item name="android:titleTextStyle">@style/AppTheme1.ActionBarTextStyle</item>
 	</style>

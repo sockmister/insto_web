@@ -45,23 +45,28 @@
         </activity>
         <activity
             android:name="com.example.icreatesecretproject.LocationGrid.LocationInFacultyActivity"
-            android:label="@string/title_activity_location_in_faculty" >
+            android:label="@string/title_activity_location_in_faculty"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.icreatesecretproject.MyRequestActivity"
-            android:label="@string/title_activity_my_request" >
+            android:label="@string/title_activity_my_request"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.icreatesecretproject.LocationGrid.LocationDisplayInformationActivity"
-            android:label="@string/title_activity_location_display_information" >
+            android:label="@string/title_activity_location_display_information"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.icreatesecretproject.CheckOthersRequest.CheckOthersRequestActivity"
-            android:label="@string/title_activity_check_others_request" >
+            android:label="@string/title_activity_check_others_request"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.icreatesecretproject.BaseActivity"
-            android:label="@string/title_activity_base" >
+            android:label="@string/title_activity_base"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.icreatesecretproject.Login.LoginActivity"

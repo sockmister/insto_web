@@ -4,12 +4,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -18,15 +16,16 @@ import android.widget.ListView;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxStatus;
+import com.example.icreatesecretproject.BaseSubActivity;
 import com.example.icreatesecretproject.R;
 
-public class LocationDisplayInformationActivity extends Activity {
+public class LocationDisplayInformationActivity extends BaseSubActivity {
 	AQuery aq;
 	ListView lv;
 	JSONArray jsonArray;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_location_in_faculty);
 
@@ -60,13 +59,6 @@ public class LocationDisplayInformationActivity extends Activity {
 
 		dialog.show();
 
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.location_display_information, menu);
-		return true;
 	}
 
 	public void getImages(int id) {

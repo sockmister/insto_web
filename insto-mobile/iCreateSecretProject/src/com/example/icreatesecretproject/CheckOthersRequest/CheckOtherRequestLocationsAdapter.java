@@ -44,19 +44,32 @@ public class CheckOtherRequestLocationsAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View v, ViewGroup vg) {
-		LayoutInflater vi;
-		vi = LayoutInflater.from(mContext);
-		v = vi.inflate(R.layout.fragment_check_other_request_fragments, null);
+		if (v == null) {
+			LayoutInflater vi;
+			vi = LayoutInflater.from(mContext);
+			v = vi.inflate(R.layout.fragment_check_other_request_fragments,
+					null);
+		}
 		TextView textView = (TextView) v.findViewById(R.id.label);
 		TextView gleamTextView = (TextView) v.findViewById(R.id.gleam_label);
 		ImageView imageView = (ImageView) v.findViewById(R.id.logo);
+
+		int count = 0;
 		try {
 			JSONObject jo = locationArray.getJSONObject(position);
+			count = Integer.parseInt(jo.getString("count"));
 			gleamTextView.setText(jo.getString("count"));
 			textView.setText(jo.getString("location_name"));
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+
+		if (count <= 0) {
+			ImageView ds = (ImageView) v.findViewById(R.id.status_dot);
+			ds.setImageResource(R.drawable.ic_dot);
+			v.setEnabled(false);
+			// v.setAlpha(0.35f);
 		}
 
 		return v;

@@ -206,7 +206,7 @@ public class CheckOthersRequestActivity extends BaseActivity {
 				Log.i("CHECK OTHER REQUEST - get ITEM obj", ja.getJSONArray(0)
 						.toString());
 				Fragment fragment = new CheckOtherRequestFragments(
-						ja.getJSONArray(0));
+						ja.getJSONArray(position));
 				return fragment;
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

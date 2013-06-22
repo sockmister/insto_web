@@ -37,8 +37,6 @@ public class CheckOtherRequestFragments extends ListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// CYW
-		String[] values = new String[] { "Arts", "Business", "Computing",
-				"Design and Environment", "Engineering", "Science", "Utown" };
 		Log.i("CHECK OTHER REQUEST - FRAGMENT", locationArray.toString());
 		setListAdapter(new CheckOtherRequestLocationsAdapter(getActivity(),
 				locationArray));
