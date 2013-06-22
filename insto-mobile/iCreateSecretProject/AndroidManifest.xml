@@ -13,6 +13,7 @@
         android:targetSdkVersion="17" />
 
     <application
+        android:name="com.example.icreatesecretproject.InstoApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/test_string"
