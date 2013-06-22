@@ -7,21 +7,20 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.example.icreatesecretproject.TakePhoto.TakePhotoActivity;
-import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
-public class BaseActivity extends SlidingFragmentActivity {
+public class BaseSubActivity extends SlidingFragmentActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		SlidingMenu sm = getSlidingMenu();
-		// sm.setShadowWidthRes(R.dimen.shadow_width);
-		// sm.setShadowDrawable(R.drawable.shadow);
-		sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
-		sm.setFadeDegree(0.35f);
-		sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+		// SlidingMenu sm = getSlidingMenu();
+		// // sm.setShadowWidthRes(R.dimen.shadow_width);
+		// // sm.setShadowDrawable(R.drawable.shadow);
+		// sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+		// sm.setFadeDegree(0.35f);
+		// sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		setBehindContentView(R.layout.menu_frame);
 		getSupportFragmentManager().beginTransaction()
@@ -50,6 +49,8 @@ public class BaseActivity extends SlidingFragmentActivity {
 
 	@Override
 	public void onBackPressed() {
-		getSlidingMenu().toggle();
+		super.onBackPressed();
+		overridePendingTransition(R.anim.from_out_slide_right,
+				R.anim.from_in_slide_right);
 	}
 }
