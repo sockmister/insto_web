@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.icreatesecretproject.CheckOthersRequest.CheckOthersRequestActivity;
 import com.example.icreatesecretproject.LocationGrid.LocationGridActivity;
+import com.example.icreatesecretproject.MakeARequest.MyRequestActivity;
 
 public class MainMenuFragment extends ListFragment {
 	private OnFragmentInteractionListener mListener;

@@ -12,20 +12,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxStatus;
 import com.example.icreatesecretproject.BaseActivity;
 import com.example.icreatesecretproject.MainMenuFragment;
 import com.example.icreatesecretproject.R;
-import com.example.icreatesecretproject.TakePhoto.TakePhotoActivity;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 public class CheckOthersRequestActivity extends BaseActivity {
@@ -37,6 +31,7 @@ public class CheckOthersRequestActivity extends BaseActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// customize the SlidingMenu
+		setContentView(R.layout.activity_check_other_request);
 		SlidingMenu sm = getSlidingMenu();
 		// sm.setShadowWidthRes(R.dimen.shadow_width);
 		// sm.setShadowDrawable(R.drawable.shadow);
@@ -48,7 +43,6 @@ public class CheckOthersRequestActivity extends BaseActivity {
 		// new ColorDrawable(Color.parseColor("#A62A00")));
 
 		Log.e("MAIN ACTIVITY", "first");
-		setContentView(R.layout.activity_check_other_request);
 		setBehindContentView(R.layout.menu_frame);
 		Log.e("MAIN ACTIVITY", "second");
 		getSupportFragmentManager().beginTransaction()
@@ -162,17 +156,6 @@ public class CheckOthersRequestActivity extends BaseActivity {
 		return true;
 	}
 
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.camera_icon:
-			Intent intent2 = new Intent(getBaseContext(),
-					TakePhotoActivity.class);
-			startActivity(intent2);
-			break;
-		}
-		return false;
-	}
-
 	public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
 		JSONArray ja;
@@ -212,12 +195,7 @@ public class CheckOthersRequestActivity extends BaseActivity {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
-			Fragment fragment = new DummySectionFragment();
-			Bundle args = new Bundle();
-			args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-			fragment.setArguments(args);
-			return fragment;
+			return null;
 		}
 
 		@Override
@@ -250,33 +228,6 @@ public class CheckOthersRequestActivity extends BaseActivity {
 				return "Utown";
 			}
 			return null;
-		}
-	}
-
-	/**
-	 * A dummy fragment representing a section of the app, but that simply
-	 * displays dummy text.
-	 */
-	public static class DummySectionFragment extends Fragment {
-		/**
-		 * The fragment argument representing the section number for this
-		 * fragment.
-		 */
-		public static final String ARG_SECTION_NUMBER = "section_number";
-
-		public DummySectionFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main_dummy,
-					container, false);
-			TextView dummyTextView = (TextView) rootView
-					.findViewById(R.id.section_label);
-			dummyTextView.setText(Integer.toString(getArguments().getInt(
-					ARG_SECTION_NUMBER)));
-			return rootView;
 		}
 	}
 

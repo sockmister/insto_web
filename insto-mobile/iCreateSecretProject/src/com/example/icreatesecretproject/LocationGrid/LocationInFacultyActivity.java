@@ -34,9 +34,9 @@ public class LocationInFacultyActivity extends BaseSubActivity {
 
 				Intent intent = new Intent(getBaseContext(),
 						LocationDisplayInformationActivity.class);
-				intent.putExtra("facultyId",
-						getIntent().getIntExtra("facultyId", 0));
-				intent.putExtra("locationId", position);
+				int location_id = getIntent().getIntExtra("facultyId", 0) * 10
+						+ position;
+				intent.putExtra("locationId", location_id);
 				startActivity(intent);
 				overridePendingTransition(R.anim.from_out_slide_left,
 						R.anim.from_in_slide_left);

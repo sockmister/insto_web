@@ -33,8 +33,7 @@ public class LocationDisplayInformationActivity extends BaseSubActivity {
 		// lv = (ListView) findViewById(R.id.list_view);
 		// lv.setAdapter(new LocationDisplayInformationAdapter(this, null));
 		Intent intent = getIntent();
-		int id = (intent.getIntExtra("facultyId", 0) * 10)
-				+ (intent.getIntExtra("locationId", 0));
+		int id = intent.getIntExtra("locationId", 0);
 		getImages(id);
 
 		lv = (ListView) findViewById(R.id.list_view);

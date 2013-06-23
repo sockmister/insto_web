@@ -49,7 +49,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.example.icreatesecretproject.MyRequestActivity"
+            android:name="com.example.icreatesecretproject.MakeARequest.MyRequestActivity"
             android:label="@string/title_activity_my_request"
             android:screenOrientation="portrait" >
         </activity>
@@ -71,12 +71,17 @@
         <activity
             android:name="com.example.icreatesecretproject.Login.LoginActivity"
             android:label="@string/app_name"
-            android:windowSoftInputMode="adjustResize|stateVisible" 
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.icreatesecretproject.CheckOthersRequest.CheckOtherRequestTakePhotoActivity"
+            android:label="@string/title_activity_check_other_request_display_information" >
         </activity>
     </application>
 

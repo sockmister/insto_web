@@ -73,14 +73,12 @@ public class TakePhotoActivity extends Activity {
 					camera.startPreview();
 					camera.takePicture(null, null, handPicStore);
 					state = 1;
-					takeAPicture.setText("Take Again");
 					sendAPicture.setEnabled(true);
 					sendAPicture.setAlpha(1.0f);
 					// camera.stopPreview();
 					// showPicture(handPicStore.getPictureByte());
 				} else if (state == 1) {
 					camera.startPreview();
-					takeAPicture.setText("Capture");
 					sendAPicture.setEnabled(false);
 					sendAPicture.setAlpha(0.35f);
 					state = 0;
@@ -216,6 +214,8 @@ public class TakePhotoActivity extends Activity {
 			}
 
 		});
+		overridePendingTransition(R.anim.scale_from_top_right_corner,
+				R.anim.stay);
 	}
 
 	protected void showPicture(byte[] pictureByte) {
@@ -328,4 +328,9 @@ public class TakePhotoActivity extends Activity {
 		}
 	}
 
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		overridePendingTransition(0, R.anim.scale_to_top_right_corner);
+	}
 }

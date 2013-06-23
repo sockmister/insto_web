@@ -1,6 +1,7 @@
 package com.example.icreatesecretproject.CheckOthersRequest;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -10,9 +11,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
-import com.example.icreatesecretproject.DisplayPictureActivity;
+import com.example.icreatesecretproject.CheckOthersRequest.CheckOthersRequestMessageFragment.OnFragmentInteractionListener;
 import com.example.icreatesecretproject.dummy.DummyContent;
-import com.example.icreatesecretproject.tabFragments.requestListFragment.OnFragmentInteractionListener;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
@@ -58,7 +58,15 @@ public class CheckOtherRequestFragments extends ListFragment {
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 
-		Intent intent = new Intent(getActivity(), DisplayPictureActivity.class);
+		Intent intent = new Intent(getActivity(),
+				CheckOtherRequestTakePhotoActivity.class);
+		try {
+			intent.putExtra("locationId", locationArray.getJSONObject(position)
+					.getInt("location_id"));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		startActivity(intent);
 
 		if (null != mListener) {
