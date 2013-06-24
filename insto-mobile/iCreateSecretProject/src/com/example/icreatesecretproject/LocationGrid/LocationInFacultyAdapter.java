@@ -64,7 +64,7 @@ public class LocationInFacultyAdapter extends BaseAdapter {
 		TextView date = (TextView) v.findViewById(R.id.location_date);
 		try {
 			JSONObject jo = (JSONObject) locationArray.get(position);
-			name.setText(jo.getString("name"));
+			name.setText(jo.getString("location_name"));
 			date.setText(getDate(jo.getString("updated_at")));
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

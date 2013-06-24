@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
@@ -15,11 +17,14 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreProtocolPNames;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
@@ -37,7 +42,15 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.androidquery.AQuery;
+import com.androidquery.callback.AjaxCallback;
+import com.androidquery.callback.AjaxStatus;
+import com.example.icreatesecretproject.Location;
+import com.example.icreatesecretproject.MainActivity;
 import com.example.icreatesecretproject.R;
+import com.example.icreatesecretproject.Login.LoginActivity;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class TakePhotoActivity extends Activity {
 	int state = 0;
@@ -46,11 +59,37 @@ public class TakePhotoActivity extends Activity {
 	File savedPictureFile;
 	HandlePictureStorage handPicStore;
 	Dialog dialog;
+	
+	Location loc;
+	ArrayList<ArrayList<Location>> locations = new ArrayList<ArrayList<Location>>();
+	boolean ready = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_take_photo);
+		
+		AQuery aq = new AQuery(this);
+		long expire = 60 * 60 * 1000; //1 hr
+		aq.ajax("http://insto-web.herokuapp.com/request/all" , JSONArray.class, expire, new AjaxCallback<JSONArray>(){
+			@Override
+	        public void callback(String url, JSONArray json, AjaxStatus status) {
+				try {
+					System.out.println(json.get(0));
+					Gson g = new Gson();
+					Type collectionType = new TypeToken<ArrayList<Location>>(){}.getType();
+					for(int i = 0; i < json.length(); i++){
+						ArrayList<Location> temp = g.fromJson(json.get(i).toString(), collectionType);
+						locations.add(temp);
+					}
+					ready = true;
+					
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	        }
+		});
 
 		handPicStore = new HandlePictureStorage();
 		// Setup the FrameLayout with the Camera Preview Screen
@@ -83,10 +122,16 @@ public class TakePhotoActivity extends Activity {
 					sendAPicture.setAlpha(0.35f);
 					state = 0;
 				}
+				
+				while(ready == false){
+					
+				}
+				sendAPicture.setEnabled(true);
 			}
 
 		});
-
+		
+		sendAPicture.setEnabled(false);
 		sendAPicture.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -122,55 +167,63 @@ public class TakePhotoActivity extends Activity {
 									View view, int position, long id) {
 								Spinner spinnerId = (Spinner) dialog
 										.findViewById(R.id.spinner_id);
-								ArrayAdapter<CharSequence> adapterId = null;
+								ArrayAdapter<Location> adapterId = null;
 								switch (position) {
 								case 0:
-									adapterId = ArrayAdapter.createFromResource(
-											view.getContext(),
-											R.array.arts_name,
-											android.R.layout.simple_spinner_item);
+//									adapterId = ArrayAdapter.createFromResource(
+//											view.getContext(),
+//											R.array.arts_name,
+//											android.R.layout.simple_spinner_item);
+									adapterId = new ArrayAdapter<Location>(view.getContext(), android.R.layout.simple_spinner_item, locations.get(position));
 									break;
 								case 1:
-									adapterId = ArrayAdapter.createFromResource(
-											view.getContext(),
-											R.array.business_name,
-											android.R.layout.simple_spinner_item);
+//									adapterId = ArrayAdapter.createFromResource(
+//											view.getContext(),
+//											R.array.business_name,
+//											android.R.layout.simple_spinner_item);
+									adapterId = new ArrayAdapter<Location>(view.getContext(), android.R.layout.simple_spinner_item, locations.get(position));
 									break;
 								case 2:
-									adapterId = ArrayAdapter.createFromResource(
-											view.getContext(),
-											R.array.computing_name,
-											android.R.layout.simple_spinner_item);
+//									adapterId = ArrayAdapter.createFromResource(
+//											view.getContext(),
+//											R.array.computing_name,
+//											android.R.layout.simple_spinner_item);
+									adapterId = new ArrayAdapter<Location>(view.getContext(), android.R.layout.simple_spinner_item, locations.get(position));
 									break;
 								case 3:
-									adapterId = ArrayAdapter.createFromResource(
-											view.getContext(),
-											R.array.engineering_name,
-											android.R.layout.simple_spinner_item);
+//									adapterId = ArrayAdapter.createFromResource(
+//											view.getContext(),
+//											R.array.engineering_name,
+//											android.R.layout.simple_spinner_item);
+									adapterId = new ArrayAdapter<Location>(view.getContext(), android.R.layout.simple_spinner_item, locations.get(position));
 									break;
 								case 4:
-									adapterId = ArrayAdapter.createFromResource(
-											view.getContext(),
-											R.array.medicine_name,
-											android.R.layout.simple_spinner_item);
+//									adapterId = ArrayAdapter.createFromResource(
+//											view.getContext(),
+//											R.array.medicine_name,
+//											android.R.layout.simple_spinner_item);
+									adapterId = new ArrayAdapter<Location>(view.getContext(), android.R.layout.simple_spinner_item, locations.get(position));
 									break;
 								case 5:
-									adapterId = ArrayAdapter.createFromResource(
-											view.getContext(),
-											R.array.science_name,
-											android.R.layout.simple_spinner_item);
+//									adapterId = ArrayAdapter.createFromResource(
+//											view.getContext(),
+//											R.array.science_name,
+//											android.R.layout.simple_spinner_item);
+									adapterId = new ArrayAdapter<Location>(view.getContext(), android.R.layout.simple_spinner_item, locations.get(position));
 									break;
 								case 6:
-									adapterId = ArrayAdapter.createFromResource(
-											view.getContext(),
-											R.array.sde_name,
-											android.R.layout.simple_spinner_item);
+//									adapterId = ArrayAdapter.createFromResource(
+//											view.getContext(),
+//											R.array.sde_name,
+//											android.R.layout.simple_spinner_item);
+									adapterId = new ArrayAdapter<Location>(view.getContext(), android.R.layout.simple_spinner_item, locations.get(position));
 									break;
 								case 7:
-									adapterId = ArrayAdapter.createFromResource(
-											view.getContext(),
-											R.array.utown_name,
-											android.R.layout.simple_spinner_item);
+//									adapterId = ArrayAdapter.createFromResource(
+//											view.getContext(),
+//											R.array.utown_name,
+//											android.R.layout.simple_spinner_item);
+									adapterId = new ArrayAdapter<Location>(view.getContext(), android.R.layout.simple_spinner_item, locations.get(position));
 									break;
 								}
 								adapterId
@@ -196,9 +249,8 @@ public class TakePhotoActivity extends Activity {
 						// TODO Auto-generated method stub
 						savedPictureFile = handPicStore.getPictureFile();
 
-						int location_id = (spinnerFaculty
-								.getSelectedItemPosition() * 10)
-								+ (spinnerId.getSelectedItemPosition());
+						int location_id = ((Location)spinnerId.getSelectedItem()).getLocation_id();
+						System.out.println(location_id);
 						new POSTMultipart(savedPictureFile, Integer
 								.toString(location_id), dialog).execute();
 					}

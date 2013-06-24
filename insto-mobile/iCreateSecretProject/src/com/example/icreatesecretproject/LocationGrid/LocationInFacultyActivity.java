@@ -1,5 +1,8 @@
 package com.example.icreatesecretproject.LocationGrid;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+
 import org.json.JSONArray;
 
 import android.content.Intent;
@@ -13,12 +16,18 @@ import android.widget.ListView;
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxStatus;
 import com.example.icreatesecretproject.BaseSubActivity;
+import com.example.icreatesecretproject.Location;
 import com.example.icreatesecretproject.R;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class LocationInFacultyActivity extends BaseSubActivity {
 
 	AQuery aq;
 	ListView lv;
+	
+	ArrayList<Location> locations;
+	int location_id;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -34,8 +43,7 @@ public class LocationInFacultyActivity extends BaseSubActivity {
 
 				Intent intent = new Intent(getBaseContext(),
 						LocationDisplayInformationActivity.class);
-				int location_id = getIntent().getIntExtra("facultyId", 0) * 10
-						+ position;
+				location_id = locations.get(position).getLocation_id();
 				intent.putExtra("locationId", location_id);
 				startActivity(intent);
 				overridePendingTransition(R.anim.from_out_slide_left,
@@ -65,7 +73,10 @@ public class LocationInFacultyActivity extends BaseSubActivity {
 		System.out.println(json);
 		// TextView tv = (TextView) findViewById(R.id.text_view);
 		// tv.setText(json.toString());
-
+		
+		Gson g = new Gson();
+		Type collectionType = new TypeToken<ArrayList<Location>>(){}.getType();
+		locations = g.fromJson(json.toString(), collectionType);
 		lv = (ListView) findViewById(R.id.list_view);
 		lv.setAdapter(new LocationInFacultyAdapter(this, json));
 		// if(json != null){
