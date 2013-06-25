@@ -2,6 +2,7 @@ package com.example.icreatesecretproject.LocationGrid.testgallery;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -32,14 +33,14 @@ public class PlaceSlidesFragmentAdapter extends FragmentPagerAdapter implements
 	@Override
 	public Fragment getItem(int position) {
 		// return new PlaceSlideFragment(Images[position]);
-		String url = "";
+		JSONObject jo = null;
 		try {
-			url = jA.getJSONObject(position).getString("image_url");
+			jo = jA.getJSONObject(position);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return new PlaceSlideFragment(url);
+		return new PlaceSlideFragment(jo);
 	}
 
 	@Override

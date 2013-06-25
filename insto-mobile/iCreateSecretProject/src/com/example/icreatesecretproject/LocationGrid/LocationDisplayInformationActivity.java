@@ -1,5 +1,9 @@
 package com.example.icreatesecretproject.LocationGrid;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,8 +15,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidquery.AQuery;
@@ -32,12 +38,27 @@ public class LocationDisplayInformationActivity extends BaseSubActivity {
 	ViewPager mPager;
 	PageIndicator mIndicator;
 
+	TextView latestTime;
+	TextView earliestTime;
+	TextView date;
+	TextView gleamPoints;
+	Button addGleam;
+	Button minusGleam;
+	JSONArray ja;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.test_gallery);
 		aq = new AQuery(this);
+
+		latestTime = (TextView) findViewById(R.id.latest_time);
+		earliestTime = (TextView) findViewById(R.id.earliest_time);
+		date = (TextView) findViewById(R.id.date);
+		gleamPoints = (TextView) findViewById(R.id.gleam);
+		addGleam = (Button) findViewById(R.id.button_add_gleam);
+		minusGleam = (Button) findViewById(R.id.button_minus_gleam);
 
 		getImages2(getIntent().getIntExtra("locationId", 0));
 		// Set the pager with an adapter
@@ -147,6 +168,7 @@ public class LocationDisplayInformationActivity extends BaseSubActivity {
 	}
 
 	public void jsonCallback2(String url, JSONArray json, AjaxStatus status) {
+		ja = json;
 		Log.i("LOCATION DISPLAY INFORMATION", url + " " + status.getCode()
 				+ "\n" + json.toString());
 		System.out.println(json);
@@ -168,6 +190,13 @@ public class LocationDisplayInformationActivity extends BaseSubActivity {
 						Toast.makeText(getBaseContext(),
 								"Changed to page " + position,
 								Toast.LENGTH_SHORT).show();
+						try {
+							gleamPoints.setText(ja.getJSONObject(position)
+									.getString("gleam"));
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 
 					@Override
@@ -180,5 +209,59 @@ public class LocationDisplayInformationActivity extends BaseSubActivity {
 					}
 				});
 
+		if (json.length() > 0) {
+			try {
+				JSONObject firstO = json.getJSONObject(0);
+				JSONObject lastO = json.getJSONObject(json.length() - 1);
+
+				latestTime.setText(getTime(firstO.getString("created_at")));
+				earliestTime.setText(getTime(lastO.getString("created_at")));
+				date.setText(getDate(firstO.getString("created_at")));
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+
+	}
+
+	private String getDate(String dateCreated) {
+		Log.i("IN FACULTY", dateCreated);
+		String _date = "";
+		String _time = "";
+		SimpleDateFormat format = new SimpleDateFormat(
+				"yyyy-MM-dd'T'HH:mm:ss'Z'");
+		// format.setTimeZone(TimeZone.getTimeZone("UTC"));
+		Date date;
+		try {
+			date = format.parse(dateCreated);
+			java.text.DateFormat dateFormat = android.text.format.DateFormat
+					.getDateFormat(this);
+			_date = dateFormat.format(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		return _date;
+	}
+
+	private String getTime(String dateCreated) {
+		Log.i("IN FACULTY", dateCreated);
+		String _time = "";
+		SimpleDateFormat format = new SimpleDateFormat(
+				"yyyy-MM-dd'T'HH:mm:ss'Z'");
+		// format.setTimeZone(TimeZone.getTimeZone("UTC"));
+		Date date;
+		try {
+			date = format.parse(dateCreated);
+			java.text.DateFormat dateFormat = android.text.format.DateFormat
+					.getTimeFormat(this);
+			_time = dateFormat.format(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		return _time;
 	}
 }
