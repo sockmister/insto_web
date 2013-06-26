@@ -28,6 +28,7 @@ public class PlaceSlidesFragmentAdapter extends FragmentPagerAdapter implements
 	public PlaceSlidesFragmentAdapter(FragmentManager fm, JSONArray json) {
 		super(fm);
 		jA = json;
+		mCount = jA.length();
 	}
 
 	@Override
@@ -55,9 +56,7 @@ public class PlaceSlidesFragmentAdapter extends FragmentPagerAdapter implements
 	}
 
 	public void setCount(int count) {
-		if (count > 0 && count <= 10) {
-			mCount = count;
-			notifyDataSetChanged();
-		}
+		mCount = count;
+		notifyDataSetChanged();
 	}
 }
