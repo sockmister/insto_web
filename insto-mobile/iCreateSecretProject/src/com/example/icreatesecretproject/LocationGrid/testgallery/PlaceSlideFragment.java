@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.androidquery.AQuery;
@@ -47,6 +48,7 @@ public final class PlaceSlideFragment extends Fragment {
 		View v = inflater.inflate(R.layout.image_gallery_item, null);
 
 		ImageView image = (ImageView) v.findViewById(R.id.image_in_gallery);
+		ProgressBar pb = (ProgressBar) v.findViewById(R.id.progressBar);
 		TextView matiricNumber = (TextView) v.findViewById(R.id.user_matric);
 		TextView imageDate = (TextView) v.findViewById(R.id.image_date);
 
@@ -64,7 +66,7 @@ public final class PlaceSlideFragment extends Fragment {
 
 		imageDate.setText(date);
 		AQuery aq = new AQuery(getActivity());
-		aq.id(image).image(url, true, true, 600, 0);
+		aq.id(image).progress(pb).image(url, true, true, 600, 0);
 		// image.setImageResource(imageResourceId);
 
 		return v;

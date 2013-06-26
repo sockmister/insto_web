@@ -3,6 +3,8 @@ package com.example.icreatesecretproject.LocationGrid;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,17 +15,18 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxStatus;
 import com.example.icreatesecretproject.BaseSubActivity;
+import com.example.icreatesecretproject.InstoApplication;
 import com.example.icreatesecretproject.R;
 import com.example.icreatesecretproject.LocationGrid.testgallery.PlaceSlidesFragmentAdapter;
 import com.viewpagerindicator.CirclePageIndicator;
@@ -45,6 +48,8 @@ public class LocationDisplayInformationActivity extends BaseSubActivity {
 	Button addGleam;
 	Button minusGleam;
 	JSONArray ja;
+
+	int currPosition = 0;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -169,7 +174,7 @@ public class LocationDisplayInformationActivity extends BaseSubActivity {
 
 	public void jsonCallback2(String url, JSONArray json, AjaxStatus status) {
 		ja = json;
-		Log.i("LOCATION DISPLAY INFORMATION", url + " " + status.getCode()
+		Log.i("LOCATION DISPLAY INFORMATION 2", url + " " + status.getCode()
 				+ "\n" + json.toString());
 		System.out.println(json);
 
@@ -187,9 +192,7 @@ public class LocationDisplayInformationActivity extends BaseSubActivity {
 				.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 					@Override
 					public void onPageSelected(int position) {
-						Toast.makeText(getBaseContext(),
-								"Changed to page " + position,
-								Toast.LENGTH_SHORT).show();
+						currPosition = position;
 						try {
 							gleamPoints.setText(ja.getJSONObject(position)
 									.getString("gleam"));
@@ -209,6 +212,30 @@ public class LocationDisplayInformationActivity extends BaseSubActivity {
 					}
 				});
 
+		addGleam.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Log.i("LOCATION IN FACULTY ACTION - onclick)", "");
+				Map<String, Object> params = new HashMap<String, Object>();
+
+				try {
+					String id = ja.getJSONObject(currPosition).getString("id");
+					params.put("user_id", InstoApplication.instance
+							.getUserInfo().getId());
+					params.put("submission_id", id);
+					String url = "http://insto-web.herokuapp.com/submission/gleam";
+
+					Log.i("LOCATION IN FACULTY ACTION)", id);
+					aq.ajax(url, params, JSONArray.class, this, "jsonCallback3");
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		});
+
 		if (json.length() > 0) {
 			try {
 				JSONObject firstO = json.getJSONObject(0);
@@ -217,12 +244,21 @@ public class LocationDisplayInformationActivity extends BaseSubActivity {
 				latestTime.setText(getTime(firstO.getString("created_at")));
 				earliestTime.setText(getTime(lastO.getString("created_at")));
 				date.setText(getDate(firstO.getString("created_at")));
+				gleamPoints.setText(ja.getJSONObject(0).getString("gleam"));
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
 		}
+
+	}
+
+	public void jsonCallback3(String url, JSONArray json, AjaxStatus status) {
+		Log.i("LOCATION DISPLAY INFORMATION 3", url + " " + status.getCode()
+				+ "\n" + json.toString());
+		addGleam.setEnabled(false);
+		addGleam.setAlpha(0.35f);
 
 	}
 

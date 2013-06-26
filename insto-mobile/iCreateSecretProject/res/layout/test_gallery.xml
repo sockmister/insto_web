@@ -85,16 +85,18 @@
 
         <TextView
             android:id="@+id/gleam"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:gravity="center"
-            android:textSize="20dp"
-            android:fontFamily="HelveticaNeue-CondensedBold.ttf"
-            android:textColor="#000000"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignBottom="@+id/button_add_gleam"
+            android:layout_alignTop="@+id/button_add_gleam"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
             android:layout_weight="0.12"
-            android:hint="Date" />
+            android:background="@drawable/bg_gleam_value"
+            android:fontFamily="HelveticaNeue-CondensedBold.ttf"
+            android:gravity="center"
+            android:hint="0"
+            android:textColor="#000000"
+            android:textSize="20dp" />
 
         <Button
             android:id="@+id/button_minus_gleam"
@@ -102,7 +104,9 @@
             android:layout_height="60dp"
             android:layout_alignTop="@+id/gleam"
             android:layout_toLeftOf="@+id/gleam"
-            android:background="@drawable/btn_minus" />
+            android:background="@drawable/btn_minus"
+            android:enabled="false"
+            android:alpha="0.35" />
 
         <Button
             android:id="@+id/button_add_gleam"
