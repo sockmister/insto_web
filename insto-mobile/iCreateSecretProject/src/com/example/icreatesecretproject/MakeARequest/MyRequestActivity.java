@@ -106,6 +106,7 @@ public class MyRequestActivity extends BaseActivity {
 				// location id
 				int location_id = (spinnerFaculty.getSelectedItemPosition() * 10)
 						+ (spinnerId.getSelectedItemPosition());
+				location_id = locations.get(spinnerFaculty.getSelectedItemPosition()).get(spinnerId.getSelectedItemPosition()).getLocation_id();
 
 				EditText ed = (EditText) findViewById(R.id.message);
 				String message = ed.getText().toString();
