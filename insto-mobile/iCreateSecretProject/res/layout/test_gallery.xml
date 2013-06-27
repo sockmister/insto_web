@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <com.viewpagerindicator.CirclePageIndicator
+        android:id="@+id/indicator"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dip"
+    	android:background="@color/color_brown" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.14" 
+        android:background="@color/nus_orange">
+       
+        <TextView 
+            android:id="@+id/latest_time_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="2dp"
+            android:text="Latest Time"/>
+        <TextView 
+            android:id="@+id/latest_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/latest_time_label"
+            android:textSize="15dp"
+            android:fontFamily="HelveticaNeue-CondensedBold.ttf"
+            android:padding="3dp"
+            android:textColor="#ffffff"
+            android:background="@color/nus_orange"
+            android:hint="l time"/>
+
+        <TextView
+            android:id="@+id/earliest_time_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true" 
+            android:paddingRight="2dp"
+            android:text="Earliest Time"/>
+         <TextView
+            android:id="@+id/earliest_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/earliest_time_label" 
+            android:textSize="15dp"
+            android:fontFamily="HelveticaNeue-CondensedBold.ttf"
+            android:padding="3dp"
+            android:textColor="#ffffff"
+            android:background="@color/nus_orange"
+            android:hint="e time"/>
+"
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textSize="20dp"
+            android:fontFamily="HelveticaNeue-CondensedBold.ttf"
+            android:padding="3dp"
+            android:textColor="#ffffff"
+            android:background="@color/nus_orange"
+            android:hint="Date" />
+
+	</RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.30" >
+
+        <TextView
+            android:id="@+id/gleam"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignBottom="@+id/button_add_gleam"
+            android:layout_alignTop="@+id/button_add_gleam"
+            android:layout_centerHorizontal="true"
+            android:layout_weight="0.12"
+            android:background="@drawable/bg_gleam_value"
+            android:fontFamily="HelveticaNeue-CondensedBold.ttf"
+            android:gravity="center"
+            android:hint="0"
+            android:textColor="#000000"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/button_minus_gleam"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignTop="@+id/gleam"
+            android:layout_toLeftOf="@+id/gleam"
+            android:background="@drawable/btn_minus"
+            android:enabled="false"
+            android:alpha="0.35" />
+
+        <Button
+            android:id="@+id/button_add_gleam"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/gleam" 
+            android:background="@drawable/btn_plus"/>
+
+    </RelativeLayout>
+  
+</LinearLayout>

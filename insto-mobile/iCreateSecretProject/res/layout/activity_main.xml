@@ -1,15 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/dashboard_frame"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-    android:orientation="vertical">
-    <TextView
-    android:id="@+id/contact_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:layout_marginLeft="15dp"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
- 
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_weight="0.05" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:orientation="vertical" >
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="0dp" 
+                android:layout_weight="1"
+                android:background="@drawable/bg_empty_pin_box"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="HelveticaNeue-CondensedBold.ttf"
+                android:textStyle="bold"
+                android:textColor="@color/color_text_grey_light"
+                android:text="Pin Your Location Here!"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" 
+                android:background="@drawable/bg_empty_pin_box"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="HelveticaNeue-CondensedBold.ttf"
+                android:textStyle="bold"
+                android:textColor="@color/color_text_grey_light"
+                android:text="Pin Your Location Here!"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="0dp" 
+                android:layout_weight="1"
+                android:background="@drawable/bg_empty_pin_box"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="HelveticaNeue-CondensedBold.ttf"
+                android:textStyle="bold"
+                android:textColor="@color/color_text_grey_light"
+                android:text="Pin Your Location Here!"/>
+
+        </LinearLayout>
+        
 </RelativeLayout>
+    <TextView
+        android:id="@+id/contact_label"
+        android:layout_width="288dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="3dp"
+        android:layout_weight="0.06"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</LinearLayout>

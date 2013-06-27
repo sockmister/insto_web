@@ -61,30 +61,33 @@ public class MyRequestActivity extends BaseActivity {
 				this, R.array.arts_name, android.R.layout.simple_spinner_item);
 		
 		AQuery aq = new AQuery(this);
-		long expire = 60 * 60 * 1000; //1 hr
-		aq.ajax("http://insto-web.herokuapp.com/request/all" , JSONArray.class, expire, new AjaxCallback<JSONArray>(){
+		long expire = 60 * 60 * 1000; // 1 hr
+		aq.ajax("http://insto-web.herokuapp.com/request/all", JSONArray.class, expire, new AjaxCallback<JSONArray>() {
 			@Override
-	        public void callback(String url, JSONArray json, AjaxStatus status) {
+			public void callback(String url, JSONArray json, AjaxStatus status) {
 				try {
-					System.out.println(json.get(0));
 					Gson g = new Gson();
-					Type collectionType = new TypeToken<ArrayList<Location>>(){}.getType();
-					for(int i = 0; i < json.length(); i++){
+					Type collectionType = new TypeToken<ArrayList<Location>>() {}.getType();
+					for (int i = 0; i < json.length(); i++) {
 						ArrayList<Location> temp = g.fromJson(json.get(i).toString(), collectionType);
 						locations.add(temp);
 					}
-					
+		
 					adapterId = new ArrayAdapter<Location>(MyRequestActivity.this, android.R.layout.simple_spinner_item, locations.get(0));
-//					adapterId
-//					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 					setupSpinner();
-					
+		
 					spinnerId.setAdapter(adapterId);
 					MyRequestActivity.this.showProgress(false);
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+			
+				adapterId = new ArrayAdapter<Location>(MyRequestActivity.this, android.R.layout.simple_spinner_item, locations.get(0));
+				setupSpinner();
+				
+				spinnerId.setAdapter(adapterId);
+				MyRequestActivity.this.showProgress(false);
 	        }
 		});
 		
@@ -154,60 +157,76 @@ public class MyRequestActivity extends BaseActivity {
 				ArrayAdapter<Location> adapterId = null;
 				switch (position) {
 				case 0:
-//					adapterId = ArrayAdapter.createFromResource(
-//							view.getContext(),
-//							R.array.arts_name,
-//							android.R.layout.simple_spinner_item);
-					adapterId = new ArrayAdapter<Location>(view.getContext(), android.R.layout.simple_spinner_item, locations.get(position));
+					// adapterId = ArrayAdapter.createFromResource(
+					// view.getContext(),
+					// R.array.arts_name,
+					// android.R.layout.simple_spinner_item);
+					adapterId = new ArrayAdapter<Location>(view.getContext(),
+							android.R.layout.simple_spinner_item, locations
+									.get(position));
 					break;
 				case 1:
-//					adapterId = ArrayAdapter.createFromResource(
-//							view.getContext(),
-//							R.array.business_name,
-//							android.R.layout.simple_spinner_item);
-					adapterId = new ArrayAdapter<Location>(view.getContext(), android.R.layout.simple_spinner_item, locations.get(position));
+					// adapterId = ArrayAdapter.createFromResource(
+					// view.getContext(),
+					// R.array.business_name,
+					// android.R.layout.simple_spinner_item);
+					adapterId = new ArrayAdapter<Location>(view.getContext(),
+							android.R.layout.simple_spinner_item, locations
+									.get(position));
 					break;
 				case 2:
-//					adapterId = ArrayAdapter.createFromResource(
-//							view.getContext(),
-//							R.array.computing_name,
-//							android.R.layout.simple_spinner_item);
-					adapterId = new ArrayAdapter<Location>(view.getContext(), android.R.layout.simple_spinner_item, locations.get(position));
+					// adapterId = ArrayAdapter.createFromResource(
+					// view.getContext(),
+					// R.array.computing_name,
+					// android.R.layout.simple_spinner_item);
+					adapterId = new ArrayAdapter<Location>(view.getContext(),
+							android.R.layout.simple_spinner_item, locations
+									.get(position));
 					break;
 				case 3:
-//					adapterId = ArrayAdapter.createFromResource(
-//							view.getContext(),
-//							R.array.engineering_name,
-//							android.R.layout.simple_spinner_item);
-					adapterId = new ArrayAdapter<Location>(view.getContext(), android.R.layout.simple_spinner_item, locations.get(position));
+					// adapterId = ArrayAdapter.createFromResource(
+					// view.getContext(),
+					// R.array.engineering_name,
+					// android.R.layout.simple_spinner_item);
+					adapterId = new ArrayAdapter<Location>(view.getContext(),
+							android.R.layout.simple_spinner_item, locations
+									.get(position));
 					break;
 				case 4:
-//					adapterId = ArrayAdapter.createFromResource(
-//							view.getContext(),
-//							R.array.medicine_name,
-//							android.R.layout.simple_spinner_item);
-					adapterId = new ArrayAdapter<Location>(view.getContext(), android.R.layout.simple_spinner_item, locations.get(position));
+					// adapterId = ArrayAdapter.createFromResource(
+					// view.getContext(),
+					// R.array.medicine_name,
+					// android.R.layout.simple_spinner_item);
+					adapterId = new ArrayAdapter<Location>(view.getContext(),
+							android.R.layout.simple_spinner_item, locations
+									.get(position));
 					break;
 				case 5:
-//					adapterId = ArrayAdapter.createFromResource(
-//							view.getContext(),
-//							R.array.science_name,
-//							android.R.layout.simple_spinner_item);
-					adapterId = new ArrayAdapter<Location>(view.getContext(), android.R.layout.simple_spinner_item, locations.get(position));
+					// adapterId = ArrayAdapter.createFromResource(
+					// view.getContext(),
+					// R.array.science_name,
+					// android.R.layout.simple_spinner_item);
+					adapterId = new ArrayAdapter<Location>(view.getContext(),
+							android.R.layout.simple_spinner_item, locations
+									.get(position));
 					break;
 				case 6:
-//					adapterId = ArrayAdapter.createFromResource(
-//							view.getContext(),
-//							R.array.sde_name,
-//							android.R.layout.simple_spinner_item);
-					adapterId = new ArrayAdapter<Location>(view.getContext(), android.R.layout.simple_spinner_item, locations.get(position));
+					// adapterId = ArrayAdapter.createFromResource(
+					// view.getContext(),
+					// R.array.sde_name,
+					// android.R.layout.simple_spinner_item);
+					adapterId = new ArrayAdapter<Location>(view.getContext(),
+							android.R.layout.simple_spinner_item, locations
+									.get(position));
 					break;
 				case 7:
-//					adapterId = ArrayAdapter.createFromResource(
-//							view.getContext(),
-//							R.array.utown_name,
-//							android.R.layout.simple_spinner_item);
-					adapterId = new ArrayAdapter<Location>(view.getContext(), android.R.layout.simple_spinner_item, locations.get(position));
+					// adapterId = ArrayAdapter.createFromResource(
+					// view.getContext(),
+					// R.array.utown_name,
+					// android.R.layout.simple_spinner_item);
+					adapterId = new ArrayAdapter<Location>(view.getContext(),
+							android.R.layout.simple_spinner_item, locations
+									.get(position));
 					break;
 				}
 				adapterId
@@ -224,8 +243,8 @@ public class MyRequestActivity extends BaseActivity {
 
 		});
 	}
-	
-	public void showProgress(boolean show){
+
+	public void showProgress(boolean show) {
 		pb.setVisibility(show ? View.VISIBLE : View.GONE);
 		form.setVisibility(show ? View.GONE : View.VISIBLE);
 	}

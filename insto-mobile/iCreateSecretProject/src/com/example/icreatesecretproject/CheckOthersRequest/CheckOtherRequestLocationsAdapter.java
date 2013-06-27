@@ -75,4 +75,22 @@ public class CheckOtherRequestLocationsAdapter extends BaseAdapter {
 		return v;
 	}
 
+	@Override
+	public boolean isEnabled(int position) {
+		int count = 0;
+		try {
+			JSONObject jo = locationArray.getJSONObject(position);
+			count = Integer.parseInt(jo.getString("count"));
+			if (count <= 0) {
+				return false;
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+
+	}
+
 }

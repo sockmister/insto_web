@@ -1,42 +1,111 @@
 package com.example.icreatesecretproject.LocationGrid;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxStatus;
 import com.example.icreatesecretproject.BaseSubActivity;
+import com.example.icreatesecretproject.InstoApplication;
 import com.example.icreatesecretproject.R;
+import com.example.icreatesecretproject.LocationGrid.testgallery.PlaceSlidesFragmentAdapter;
+import com.viewpagerindicator.CirclePageIndicator;
+import com.viewpagerindicator.PageIndicator;
 
 public class LocationDisplayInformationActivity extends BaseSubActivity {
 	AQuery aq;
 	ListView lv;
 	JSONArray jsonArray;
 
+	PlaceSlidesFragmentAdapter mAdapter;
+	ViewPager mPager;
+	PageIndicator mIndicator;
+
+	TextView latestTime;
+	TextView earliestTime;
+	TextView date;
+	TextView gleamPoints;
+	Button addGleam;
+	Button minusGleam;
+	JSONArray ja;
+
+	int currPosition = 0;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_location_in_faculty);
 
+		setContentView(R.layout.test_gallery);
 		aq = new AQuery(this);
-		// lv = (ListView) findViewById(R.id.list_view);
-		// lv.setAdapter(new LocationDisplayInformationAdapter(this, null));
-		Intent intent = getIntent();
-		int id = intent.getIntExtra("locationId", 0);
-		getImages(id);
 
-		lv = (ListView) findViewById(R.id.list_view);
+		latestTime = (TextView) findViewById(R.id.latest_time);
+		earliestTime = (TextView) findViewById(R.id.earliest_time);
+		date = (TextView) findViewById(R.id.date);
+		gleamPoints = (TextView) findViewById(R.id.gleam);
+		addGleam = (Button) findViewById(R.id.button_add_gleam);
+		minusGleam = (Button) findViewById(R.id.button_minus_gleam);
+
+		getImages2(getIntent().getIntExtra("locationId", 0));
+		// Set the pager with an adapter
+		// mAdapter = new
+		// PlaceSlidesFragmentAdapter(getSupportFragmentManager());
+		//
+		// mPager = (ViewPager) findViewById(R.id.pager);
+		// mPager.setAdapter(mAdapter);
+		//
+		// mIndicator = (CirclePageIndicator) findViewById(R.id.indicator);
+		// mIndicator.setViewPager(mPager);
+		// ((CirclePageIndicator) mIndicator).setSnap(true);
+		//
+		// mIndicator
+		// .setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+		// @Override
+		// public void onPageSelected(int position) {
+		// Toast.makeText(getBaseContext(),
+		// "Changed to page " + position,
+		// Toast.LENGTH_SHORT).show();
+		// }
+		//
+		// @Override
+		// public void onPageScrolled(int position,
+		// float positionOffset, int positionOffsetPixels) {
+		// }
+		//
+		// @Override
+		// public void onPageScrollStateChanged(int state) {
+		// }
+		// });
+
+		// setContentView(R.layout.activity_location_in_faculty);
+		//
+		// aq = new AQuery(this);
+		// // lv = (ListView) findViewById(R.id.list_view);
+		// // lv.setAdapter(new LocationDisplayInformationAdapter(this, null));
+		// Intent intent = getIntent();
+		// int id = intent.getIntExtra("locationId", 0);
+		// getImages(id);
+		//
+		// lv = (ListView) findViewById(R.id.list_view);
 	}
 
 	protected void showPictureDetails(View v, int position) {
@@ -96,4 +165,139 @@ public class LocationDisplayInformationActivity extends BaseSubActivity {
 
 	}
 
+	public void getImages2(int id) {
+		String url = "http://insto-web.herokuapp.com/location/" + id
+				+ "/submission";
+		Log.i("LOCATION IN FACULTY ACTION)", "enter");
+		aq.ajax(url, JSONArray.class, this, "jsonCallback2");
+	}
+
+	public void jsonCallback2(String url, JSONArray json, AjaxStatus status) {
+		ja = json;
+		Log.i("LOCATION DISPLAY INFORMATION 2", url + " " + status.getCode()
+				+ "\n" + json.toString());
+		System.out.println(json);
+
+		mAdapter = new PlaceSlidesFragmentAdapter(getSupportFragmentManager(),
+				json);
+
+		mPager = (ViewPager) findViewById(R.id.pager);
+		mPager.setAdapter(mAdapter);
+
+		mIndicator = (CirclePageIndicator) findViewById(R.id.indicator);
+		mIndicator.setViewPager(mPager);
+		((CirclePageIndicator) mIndicator).setSnap(true);
+
+		mIndicator
+				.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+					@Override
+					public void onPageSelected(int position) {
+						currPosition = position;
+						try {
+							gleamPoints.setText(ja.getJSONObject(position)
+									.getString("gleam"));
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+
+					@Override
+					public void onPageScrolled(int position,
+							float positionOffset, int positionOffsetPixels) {
+					}
+
+					@Override
+					public void onPageScrollStateChanged(int state) {
+					}
+				});
+
+		addGleam.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Log.i("LOCATION IN FACULTY ACTION - onclick)", "");
+				Map<String, Object> params = new HashMap<String, Object>();
+
+				try {
+					String id = ja.getJSONObject(currPosition).getString("id");
+					params.put("user_id", InstoApplication.instance
+							.getUserInfo().getId());
+					params.put("submission_id", id);
+					String url = "http://insto-web.herokuapp.com/submission/gleam";
+
+					Log.i("LOCATION IN FACULTY ACTION)", id);
+					aq.ajax(url, params, JSONArray.class, this, "jsonCallback3");
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		});
+
+		if (json.length() > 0) {
+			try {
+				JSONObject firstO = json.getJSONObject(0);
+				JSONObject lastO = json.getJSONObject(json.length() - 1);
+
+				latestTime.setText(getTime(firstO.getString("created_at")));
+				earliestTime.setText(getTime(lastO.getString("created_at")));
+				date.setText(getDate(firstO.getString("created_at")));
+				gleamPoints.setText(ja.getJSONObject(0).getString("gleam"));
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+
+	}
+
+	public void jsonCallback3(String url, JSONArray json, AjaxStatus status) {
+		Log.i("LOCATION DISPLAY INFORMATION 3", url + " " + status.getCode()
+				+ "\n" + json.toString());
+		addGleam.setEnabled(false);
+		addGleam.setAlpha(0.35f);
+
+	}
+
+	private String getDate(String dateCreated) {
+		Log.i("IN FACULTY", dateCreated);
+		String _date = "";
+		String _time = "";
+		SimpleDateFormat format = new SimpleDateFormat(
+				"yyyy-MM-dd'T'HH:mm:ss'Z'");
+		// format.setTimeZone(TimeZone.getTimeZone("UTC"));
+		Date date;
+		try {
+			date = format.parse(dateCreated);
+			java.text.DateFormat dateFormat = android.text.format.DateFormat
+					.getDateFormat(this);
+			_date = dateFormat.format(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		return _date;
+	}
+
+	private String getTime(String dateCreated) {
+		Log.i("IN FACULTY", dateCreated);
+		String _time = "";
+		SimpleDateFormat format = new SimpleDateFormat(
+				"yyyy-MM-dd'T'HH:mm:ss'Z'");
+		// format.setTimeZone(TimeZone.getTimeZone("UTC"));
+		Date date;
+		try {
+			date = format.parse(dateCreated);
+			java.text.DateFormat dateFormat = android.text.format.DateFormat
+					.getTimeFormat(this);
+			_time = dateFormat.format(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		return _time;
+	}
 }
