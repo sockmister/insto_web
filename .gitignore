@@ -14,7 +14,7 @@ local.properties
 .settings/
 .loadpath
 insto-web/public/*
-insto-mobile/*/gen/*
+insto-mobile/**/gen/*
 R.java
 
 # External tool builders
