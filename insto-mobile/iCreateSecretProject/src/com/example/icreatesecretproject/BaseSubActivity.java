@@ -7,6 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.example.icreatesecretproject.TakePhoto.TakePhotoActivity;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
 public class BaseSubActivity extends SlidingFragmentActivity {
@@ -27,6 +28,7 @@ public class BaseSubActivity extends SlidingFragmentActivity {
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.menu_frame, new MainMenuFragment()).commit();
 		setSlidingActionBarEnabled(true);
+		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
 
 	}
 
