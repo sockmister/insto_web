@@ -17,6 +17,7 @@
             android:orientation="vertical" >
 
             <Button
+                android:id="@+id/pin1"
                 android:layout_width="match_parent"
                 android:layout_height="0dp" 
                 android:layout_weight="1"
@@ -25,8 +26,10 @@
                 android:fontFamily="HelveticaNeue-CondensedBold.ttf"
                 android:textStyle="bold"
                 android:textColor="@color/color_text_grey_light"
-                android:text="Pin Your Location Here!"/>
+                android:text="Loading..."
+                android:enabled="false"/>
             <Button
+                android:id="@+id/pin2"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1" 
@@ -35,8 +38,10 @@
                 android:fontFamily="HelveticaNeue-CondensedBold.ttf"
                 android:textStyle="bold"
                 android:textColor="@color/color_text_grey_light"
-                android:text="Pin Your Location Here!"/>
+                android:text="Loading..."
+                android:enabled="false"/>
             <Button
+                android:id="@+id/pin3"
                 android:layout_width="match_parent"
                 android:layout_height="0dp" 
                 android:layout_weight="1"
@@ -45,7 +50,8 @@
                 android:fontFamily="HelveticaNeue-CondensedBold.ttf"
                 android:textStyle="bold"
                 android:textColor="@color/color_text_grey_light"
-                android:text="Pin Your Location Here!"/>
+                android:text="Loading..."
+                android:enabled="false"/>
 
         </LinearLayout>
         
