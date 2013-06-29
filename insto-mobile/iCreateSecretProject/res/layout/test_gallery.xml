@@ -104,7 +104,7 @@
             android:layout_height="60dp"
             android:layout_alignTop="@+id/gleam"
             android:layout_toLeftOf="@+id/gleam"
-            android:background="@drawable/btn_minus"
+            android:background="@drawable/btn_accept_request"
             android:enabled="false"
             android:alpha="0.35" />
 
