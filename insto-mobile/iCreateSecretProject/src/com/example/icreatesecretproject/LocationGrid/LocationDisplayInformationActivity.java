@@ -225,9 +225,10 @@ public class LocationDisplayInformationActivity extends BaseSubActivity {
 							.getUserInfo().getId());
 					params.put("submission_id", id);
 					String url = "http://insto-web.herokuapp.com/submission/gleam";
-
+					aq.ajax(url, params, JSONArray.class,
+							LocationDisplayInformationActivity.this,
+							"jsonCallback3");
 					Log.i("LOCATION IN FACULTY ACTION)", id);
-					aq.ajax(url, params, JSONArray.class, this, "jsonCallback3");
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -256,7 +257,7 @@ public class LocationDisplayInformationActivity extends BaseSubActivity {
 
 	public void jsonCallback3(String url, JSONArray json, AjaxStatus status) {
 		Log.i("LOCATION DISPLAY INFORMATION 3", url + " " + status.getCode()
-				+ "\n" + json.toString());
+				+ "\n" + status.toString());
 		addGleam.setEnabled(false);
 		addGleam.setAlpha(0.35f);
 

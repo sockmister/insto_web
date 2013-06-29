@@ -22,6 +22,17 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:paddingTop="10dp" 
+        android:fontFamily="HelveticaNeue-CondensedBold.ttf"
+        android:textColor="@color/color_wizard_white"
+        android:textColorHint="@color/color_wizard_white"
+		android:textStyle="bold"
+		android:textOn="Msg"
+		android:textOff="Cam"
+		android:thumb="@drawable/switch_selector"
+		android:thumbTextPadding="8dp"
+		android:track="@drawable/bg_switch_selector"
         android:paddingBottom="10dp"/>
+    
+ 
 
 </RelativeLayout>
