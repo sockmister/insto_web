@@ -32,11 +32,16 @@
 		     android:paddingTop="20dp" 
 		     android:paddingBottom="20dp"/>
 		 
-		 <EditText 
+		 <EditText
 		     android:id="@+id/message"
+		     android:singleLine="false" 
+		     android:lines="6"
+		     android:maxLines="10"
+		     android:scrollbars="vertical"
+		     android:gravity="top|left"
 		     android:layout_width="match_parent"
-		     android:layout_height="50dp"
-		     android:hint="message"/>
+		     android:layout_height="wrap_content"
+		     android:hint="message" />
 		  
 		  <Button
 		       android:id="@+id/send_button"
@@ -56,7 +61,7 @@
 	</LinearLayout>
 
     <ProgressBar
-        android:id="@+id/progressBar1"
+        android:id="@+id/progressBar2"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

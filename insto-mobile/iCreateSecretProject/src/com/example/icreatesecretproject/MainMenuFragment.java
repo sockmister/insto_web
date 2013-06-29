@@ -19,7 +19,8 @@ import com.example.icreatesecretproject.MakeARequest.MyRequestActivity;
 
 public class MainMenuFragment extends ListFragment {
 	private OnFragmentInteractionListener mListener;
-
+	TextView username;
+	TextView balance;
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
 	 * fragment (e.g. upon screen orientation changes).
@@ -41,6 +42,12 @@ public class MainMenuFragment extends ListFragment {
 		mA.add(new MenuListItem("Help A Soul", R.drawable.ic_notification));
 		mA.add(new MenuListItem("My Request", R.drawable.ic_notification));
 		setListAdapter(mA);
+		
+		username = (TextView) getActivity().findViewById(R.id.user_profile_label);
+		username.setText(InstoApplication.instance.getUserInfo().getName());
+		
+		balance = (TextView) getActivity().findViewById(R.id.user_profile_bal_label);
+		balance.setText(InstoApplication.instance.getUserInfo().getPoints().toString());
 	}
 
 	@Override

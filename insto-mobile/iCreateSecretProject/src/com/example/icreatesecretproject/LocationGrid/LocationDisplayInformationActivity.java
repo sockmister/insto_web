@@ -10,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -21,10 +22,13 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxStatus;
+import com.example.icreatesecretproject.BaseActivity;
 import com.example.icreatesecretproject.BaseSubActivity;
 import com.example.icreatesecretproject.InstoApplication;
 import com.example.icreatesecretproject.R;
@@ -50,6 +54,7 @@ public class LocationDisplayInformationActivity extends BaseSubActivity {
 	JSONArray ja;
 
 	int currPosition = 0;
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -301,4 +306,5 @@ public class LocationDisplayInformationActivity extends BaseSubActivity {
 
 		return _time;
 	}
+
 }

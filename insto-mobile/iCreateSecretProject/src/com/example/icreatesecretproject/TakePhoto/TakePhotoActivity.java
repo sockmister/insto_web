@@ -9,6 +9,7 @@ import org.json.JSONException;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
@@ -26,6 +27,7 @@ import android.widget.Spinner;
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
+import com.example.icreatesecretproject.InstoApplication;
 import com.example.icreatesecretproject.Location;
 import com.example.icreatesecretproject.POSTMultipart;
 import com.example.icreatesecretproject.R;
@@ -39,6 +41,7 @@ public class TakePhotoActivity extends Activity {
 	File savedPictureFile;
 	HandlePictureStorage handPicStore;
 	Dialog dialog;
+	ProgressDialog progressDialog;
 
 	Location loc;
 	ArrayList<ArrayList<Location>> locations = new ArrayList<ArrayList<Location>>();
@@ -263,14 +266,16 @@ public class TakePhotoActivity extends Activity {
 					@Override
 					public void onClick(View arg0) {
 						// TODO Auto-generated method stub
+						progressDialog = ProgressDialog.show(TakePhotoActivity.this, "",
+		                        "Loading...");
 						savedPictureFile = handPicStore.getPictureFile();
 
 						int location_id = ((Location) spinnerId
 								.getSelectedItem()).getLocation_id();
 						System.out.println(location_id);
 						new POSTMultipart(savedPictureFile, Integer
-								.toString(location_id), dialog,
-								getBaseContext()).execute();
+								.toString(location_id), dialog, progressDialog,
+								TakePhotoActivity.this).execute();
 					}
 
 				});

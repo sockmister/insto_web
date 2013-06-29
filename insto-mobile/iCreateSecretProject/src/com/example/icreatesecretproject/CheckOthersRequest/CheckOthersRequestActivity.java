@@ -14,6 +14,9 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxStatus;
@@ -26,6 +29,7 @@ public class CheckOthersRequestActivity extends BaseActivity {
 
 	SectionsPagerAdapter mSectionsPagerAdapter;
 	ViewPager mViewPager;
+	ProgressBar pb;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,7 @@ public class CheckOthersRequestActivity extends BaseActivity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		// getActionBar().setBackgroundDrawable(
 		// new ColorDrawable(Color.parseColor("#A62A00")));
+		pb = (ProgressBar) this.findViewById(R.id.progressBar2);
 
 		Log.e("MAIN ACTIVITY", "first");
 		setBehindContentView(R.layout.menu_frame);
@@ -75,13 +80,14 @@ public class CheckOthersRequestActivity extends BaseActivity {
 
 		// mSectionsPagerAdapter = new SectionsPagerAdapter(
 		// getSupportFragmentManager());
-		getRequestCount();
+		
 
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.viewpager);
 		Log.i("CHECK OTHER REQUEST - before", " yo");
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		Log.i("CHECK OTHER REQUEST - after", " yo");
+		getRequestCount();
 		// When swiping between different sections, select the corresponding
 		// tab. We can also use ActionBar.Tab#select() to do this if we have
 		// a reference to the Tab.
@@ -115,6 +121,8 @@ public class CheckOthersRequestActivity extends BaseActivity {
 		String url = "http://insto-web.herokuapp.com/request/all";
 		Log.i("LOCATION IN FACULTY ACTION)", "enter");
 		AQuery aq = new AQuery(this);
+		
+		showProgress(true);
 		aq.ajax(url, JSONArray.class, this, "jsonCallback");
 
 	}
@@ -131,7 +139,8 @@ public class CheckOthersRequestActivity extends BaseActivity {
 		Log.i("CHECK OTHER REQUEST - before", " yo");
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		Log.i("CHECK OTHER REQUEST - after", " yo");
-
+		
+		showProgress(false);
 	}
 
 	public void callback(String url, String str, AjaxStatus status) {
@@ -230,5 +239,9 @@ public class CheckOthersRequestActivity extends BaseActivity {
 			return null;
 		}
 	}
-
+	
+	public void showProgress(boolean show) {
+		pb.setVisibility(show ? View.VISIBLE : View.GONE);
+		mViewPager.setVisibility(show ? View.GONE : View.VISIBLE);
+	}
 }

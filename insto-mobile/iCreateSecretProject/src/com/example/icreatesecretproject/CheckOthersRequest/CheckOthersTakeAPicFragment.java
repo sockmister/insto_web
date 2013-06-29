@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -29,6 +30,7 @@ import com.example.icreatesecretproject.Location;
 import com.example.icreatesecretproject.POSTMultipart;
 import com.example.icreatesecretproject.R;
 import com.example.icreatesecretproject.TakePhoto.HandlePictureStorage;
+import com.example.icreatesecretproject.TakePhoto.TakePhotoActivity;
 import com.example.icreatesecretproject.TakePhoto.TakePhotoSurfaceView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -50,6 +52,7 @@ public class CheckOthersTakeAPicFragment extends Fragment {
 	File savedPictureFile;
 	HandlePictureStorage handPicStore;
 	Dialog dialog;
+	ProgressDialog progressDialog;
 
 	Location loc;
 	ArrayList<ArrayList<Location>> locations = new ArrayList<ArrayList<Location>>();
@@ -285,13 +288,16 @@ public class CheckOthersTakeAPicFragment extends Fragment {
 					@Override
 					public void onClick(View arg0) {
 						// TODO Auto-generated method stub
+						
 						savedPictureFile = handPicStore.getPictureFile();
+						progressDialog = ProgressDialog.show(getActivity(), "",
+		                        "Loading...");
 
 						int location_id = ((Location) spinnerId
 								.getSelectedItem()).getLocation_id();
 						System.out.println(location_id);
 						new POSTMultipart(savedPictureFile, Integer
-								.toString(location_id), dialog, getActivity())
+								.toString(location_id), dialog, progressDialog, getActivity())
 								.execute();
 					}
 

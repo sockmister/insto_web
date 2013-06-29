@@ -65,6 +65,8 @@ public class MainActivity extends BaseActivity {
     Context context;
 
     String regid;
+    
+    
 
 	// SectionsPagerAdapter mSectionsPagerAdapter;
 	// ViewPager mViewPager;

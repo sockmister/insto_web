@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
+
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
@@ -18,6 +18,7 @@
         android:padding="10dip"
     	android:background="@color/color_brown" />
     <RelativeLayout
+        android:id="@+id/info_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.14" 
@@ -79,6 +80,7 @@
 	</RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/gleam_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.30" >

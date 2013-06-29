@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxStatus;
@@ -25,6 +26,7 @@ public class LocationInFacultyActivity extends BaseSubActivity {
 
 	AQuery aq;
 	ListView lv;
+	ProgressBar pb;
 	
 	ArrayList<Location> locations;
 	int location_id;
@@ -52,10 +54,12 @@ public class LocationInFacultyActivity extends BaseSubActivity {
 				// Toast.LENGTH_SHORT).show();
 			}
 		});
+		pb = (ProgressBar) this.findViewById(R.id.progressBar2);
 		getLocationPlaces();
 	}
 
 	public void getLocationPlaces() {
+		showProgress(true);
 		Intent intent = getIntent();
 		int facultyId = intent.getIntExtra("facultyId", 0);
 		String[] location = { "arts", "biz", "computing", "engineering",
@@ -79,6 +83,7 @@ public class LocationInFacultyActivity extends BaseSubActivity {
 		locations = g.fromJson(json.toString(), collectionType);
 		lv = (ListView) findViewById(R.id.list_view);
 		lv.setAdapter(new LocationInFacultyAdapter(this, json));
+		showProgress(false);
 		// if(json != null){
 		// //successful ajax call
 		// TextView tv = (TextView) findViewById(R.id.text_view);
@@ -89,6 +94,11 @@ public class LocationInFacultyActivity extends BaseSubActivity {
 		// tv.setText(json.toString());
 		// }
 
+	}
+	
+	public void showProgress(boolean show) {
+		pb.setVisibility(show ? View.VISIBLE : View.GONE);
+		lv.setVisibility(show ? View.GONE : View.VISIBLE);
 	}
 
 }

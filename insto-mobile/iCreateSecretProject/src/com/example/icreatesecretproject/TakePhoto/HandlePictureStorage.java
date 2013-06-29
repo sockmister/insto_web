@@ -58,7 +58,7 @@ public class HandlePictureStorage implements PictureCallback {
 
 			// convert to byte array
 			ByteArrayOutputStream stream = new ByteArrayOutputStream();
-			rImg.compress(Bitmap.CompressFormat.PNG, 100, stream);
+			rImg.compress(Bitmap.CompressFormat.JPEG, 100, stream);
 			byte[] byteArray = stream.toByteArray();
 
 			fos.write(byteArray);

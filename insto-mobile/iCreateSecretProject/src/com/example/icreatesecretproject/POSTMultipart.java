@@ -20,6 +20,7 @@ import org.json.JSONTokener;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -30,17 +31,19 @@ public class POSTMultipart extends AsyncTask {
 	private File pic_file;
 	String locationId;
 	Dialog dialog;
+	ProgressDialog progressDialog;
 	Context c;
 
 	public POSTMultipart(Activity ac) {
 		this.ac = ac;
 	}
 
-	public POSTMultipart(File pic_file, String locationId, Dialog dialog,
+	public POSTMultipart(File pic_file, String locationId, Dialog dialog, ProgressDialog progressDialog,
 			Context c) {
 		this.pic_file = pic_file;
 		this.locationId = locationId;
 		this.dialog = dialog;
+		this.progressDialog = progressDialog;
 		this.c = c;
 	}
 
@@ -113,8 +116,10 @@ public class POSTMultipart extends AsyncTask {
 		Log.i("TakePhotoActivity - reply", ((JSONObject) reply).toString());
 		if (dialog != null)
 			dialog.dismiss();
-		Toast.makeText(c, "Photo sent, MUTHER FUCKER!!!!", Toast.LENGTH_LONG)
+		Toast.makeText(c, "Photo sent!", Toast.LENGTH_LONG)
 				.show();
+		progressDialog.dismiss();
+		((Activity)c).finish();
 		// mImage.setVisibility(View.GONE);
 		// mButton.setVisibility(View.GONE);
 		// mText.setVisibility(View.VISIBLE);

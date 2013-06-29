@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -53,7 +54,7 @@ public class MyRequestActivity extends BaseActivity {
 		setContentView(R.layout.activity_my_request);
 		
 		form = (LinearLayout) findViewById(R.id.login_form_layout);
-		pb = (ProgressBar) findViewById(R.id.progressBar1);
+		pb = (ProgressBar) findViewById(R.id.progressBar2);
 		
 		showProgress(true);
 		spinnerId = (Spinner) findViewById(R.id.spinner_id);
@@ -122,7 +123,8 @@ public class MyRequestActivity extends BaseActivity {
 				params.put("request[location_id]", location_id);
 				params.put("request[user_id]", userid);
 				params.put("request[message]", message);
-
+				
+				MyRequestActivity.this.showProgress(true);
 				aq.ajax("http://insto-web.herokuapp.com/request", params,
 						JSONObject.class, new AjaxCallback<JSONObject>() {
 							@Override
@@ -130,9 +132,20 @@ public class MyRequestActivity extends BaseActivity {
 									AjaxStatus status) {
 								Log.i("MyRequestActivity - send return",
 										json.toString());
-								Toast.makeText(getApplicationContext(),
-										"Request sent",
-										Toast.LENGTH_LONG).show();
+								MyRequestActivity.this.showProgress(false);
+								EditText ed = (EditText) findViewById(R.id.message);
+								ed.setText("");
+								
+								if(json.has("error")){
+									Toast.makeText(getApplicationContext(),
+											"You have made a request already!",
+											Toast.LENGTH_LONG).show();
+								}
+								else{
+									Toast.makeText(getApplicationContext(),
+											"Request sent",
+											Toast.LENGTH_LONG).show();
+								}
 							}
 						});
 			}
@@ -142,8 +155,8 @@ public class MyRequestActivity extends BaseActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.my_request, menu);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.take_photo, menu);
 		return true;
 	}
 
