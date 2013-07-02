@@ -299,7 +299,7 @@ public class MyRequestActivity extends BaseActivity {
 								locations.add(temp);
 							}
 							ready = true;
-							addRequest.setAlpha(0.35f);
+							// addRequest.setAlpha(0.35f);
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
