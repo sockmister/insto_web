@@ -2,12 +2,16 @@ package com.example.icreatesecretproject.MakeARequest;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -15,13 +19,16 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
@@ -30,6 +37,7 @@ import com.example.icreatesecretproject.BaseActivity;
 import com.example.icreatesecretproject.InstoApplication;
 import com.example.icreatesecretproject.Location;
 import com.example.icreatesecretproject.R;
+import com.example.icreatesecretproject.LocationGrid.LocationDisplayInformationActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -63,10 +71,10 @@ public class MyRequestActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				final Dialog dialog = new Dialog(v.getContext());
-				dialog.setContentView(R.layout.dialog_select_photo_location);
+				dialog.setContentView(R.layout.activity_my_request);
 				dialog.setTitle("Select Location");
 
-				final Spinner spinnerFaculty = (Spinner) dialog
+				spinnerFaculty = (Spinner) dialog
 						.findViewById(R.id.spinner_faculty);
 				ArrayAdapter<CharSequence> adapter = ArrayAdapter
 						.createFromResource(v.getContext(), R.array.locations,
@@ -76,8 +84,7 @@ public class MyRequestActivity extends BaseActivity {
 				// // Apply the adapter to the spinner
 				spinnerFaculty.setAdapter(adapter);
 
-				final Spinner spinnerId = (Spinner) dialog
-						.findViewById(R.id.spinner_id);
+				spinnerId = (Spinner) dialog.findViewById(R.id.spinner_id);
 				ArrayAdapter<CharSequence> adapterId = ArrayAdapter
 						.createFromResource(v.getContext(), R.array.arts_name,
 								android.R.layout.simple_spinner_item);
@@ -202,22 +209,7 @@ public class MyRequestActivity extends BaseActivity {
 
 				Button send_button = (Button) dialog
 						.findViewById(R.id.send_button);
-				send_button.setOnClickListener(new OnClickListener() {
-
-					@Override
-					public void onClick(View arg0) {
-						// TODO Auto-generated method stub
-						progressDialog = ProgressDialog.show(
-								MyRequestActivity.this, "", "Loading...");
-
-						int location_id = ((Location) spinnerId
-								.getSelectedItem()).getLocation_id();
-						System.out.println(location_id);
-
-					}
-
-				});
-
+				setUpSendButton(send_button, dialog);
 				dialog.show();
 				//
 				// Log.i("TakePhotoActivity - send picture", "sad");
@@ -230,6 +222,62 @@ public class MyRequestActivity extends BaseActivity {
 		overridePendingTransition(R.anim.scale_from_top_right_corner,
 				R.anim.stay);
 
+	}
+
+	protected void setUpSendButton(Button send_button, final Dialog dialog) {
+		send_button.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+
+				// location id
+				int location_id = (spinnerFaculty.getSelectedItemPosition() * 10)
+						+ (spinnerId.getSelectedItemPosition());
+				location_id = locations
+						.get(spinnerFaculty.getSelectedItemPosition())
+						.get(spinnerId.getSelectedItemPosition())
+						.getLocation_id();
+
+				EditText ed = (EditText) dialog.findViewById(R.id.message);
+				String message = ed.getText().toString();
+
+				int userid = InstoApplication.instance.getUserInfo().getId();
+
+				AQuery aq = new AQuery(v.getContext());
+
+				Map<String, Object> params = new HashMap<String, Object>();
+				params.put("request[location_id]", location_id);
+				params.put("request[user_id]", userid);
+				params.put("request[message]", message);
+
+				MyRequestActivity.this.showProgress(true);
+				aq.ajax("http://insto-web.herokuapp.com/request", params,
+						JSONObject.class, new AjaxCallback<JSONObject>() {
+							@Override
+							public void callback(String url, JSONObject json,
+									AjaxStatus status) {
+								Log.i("MyRequestActivity - send return",
+										json.toString());
+								MyRequestActivity.this.showProgress(false);
+								EditText ed = (EditText) dialog
+										.findViewById(R.id.message);
+								ed.setText("");
+
+								if (json.has("error")) {
+									Toast.makeText(getApplicationContext(),
+											"You have made a request already!",
+											Toast.LENGTH_LONG).show();
+								} else {
+									Toast.makeText(getApplicationContext(),
+											"Request sent", Toast.LENGTH_LONG)
+											.show();
+								}
+							}
+						});
+			}
+
+		});
 	}
 
 	private void loadLocationArray() {
@@ -268,13 +316,35 @@ public class MyRequestActivity extends BaseActivity {
 		aq.ajax(url, JSONArray.class, this, "loadRequestJsonCallback");
 	}
 
-	public void loadRequestJsonCallback(String url, JSONArray json,
+	public void loadRequestJsonCallback(String url, final JSONArray json,
 			AjaxStatus status) {
 		Log.i("MY REQUEST", json.toString());
 		// locations = g.fromJson(json.toString(), collectionType);
 		// lv = (ListView) findViewById(R.id.list_view);
 		try {
 			lv.setAdapter(new MyRequestAdapter(this, json.getJSONArray(0)));
+			lv.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> av, View v,
+						int position, long arg3) {
+					Intent intent = new Intent(getBaseContext(),
+							LocationDisplayInformationActivity.class);
+					try {
+						intent.putExtra(
+								"locationId",
+								json.getJSONObject(position).getInt(
+										"location_id"));
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					startActivity(intent);
+
+				}
+
+			});
+
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -385,7 +455,7 @@ public class MyRequestActivity extends BaseActivity {
 	}
 
 	public void showProgress(boolean show) {
-		pb.setVisibility(show ? View.VISIBLE : View.GONE);
-		form.setVisibility(show ? View.GONE : View.VISIBLE);
+		// pb.setVisibility(show ? View.VISIBLE : View.GONE);
+		// form.setVisibility(show ? View.GONE : View.VISIBLE);
 	}
 }
