@@ -13,9 +13,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
@@ -29,16 +31,22 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
+import com.example.icreatesecretproject.CheckOthersRequest.CheckOtherRequestTakePhotoActivity;
+import com.example.icreatesecretproject.LocationGrid.LocationDisplayInformationActivity;
 import com.example.icreatesecretproject.TakePhoto.TakePhotoActivity;
 import com.google.android.gcm.GCMRegistrar;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
@@ -54,7 +62,7 @@ public class MainActivity extends BaseActivity {
 	Button button1;
 	Button button2;
 	Button button3;
-
+	ListView notificationList;
 	boolean button1empty;
 	boolean button2empty;
 	boolean button3empty;
@@ -138,7 +146,51 @@ public class MainActivity extends BaseActivity {
 			registerWithInstoBackend(regid);
 		}
 		gcm = GoogleCloudMessaging.getInstance(this);
+
 		setupPins();
+		seetupNoifications();
+	}
+
+	private void seetupNoifications() {
+		String url = "http://insto-web.herokuapp.com/request/top";
+		AQuery aq = new AQuery(this);
+		aq.ajax(url, JSONArray.class, this, "loadRequestJsonCallback");
+	}
+
+	public void loadRequestJsonCallback(String url, final JSONArray json,
+			AjaxStatus status) {
+		notificationList = (ListView) findViewById(R.id.notification_list);
+		Gson g = new Gson();
+		Type collectionType = new TypeToken<ArrayList<Location>>() {
+		}.getType();
+		locations = g.fromJson(json.toString(), collectionType);
+		notificationList.setAdapter(new LatestRequestAdapter(this, json));
+		notificationList.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> av, View v, int position,
+					long arg3) {
+				Intent intent = new Intent(getBaseContext(),
+						CheckOtherRequestTakePhotoActivity.class);
+				try {
+					intent.putExtra("locationId", json.getJSONObject(position)
+							.getInt("location_id"));
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				startActivity(intent);
+
+				// if (null != mListener) {
+				// // Notify the active callbacks interface (the activity, if
+				// the
+				// // fragment is attached to one) that an item has been
+				// selected.
+				// mListener
+				// .onFragmentInteraction(DummyContent.ITEMS.get(position).id);
+				// }
+			}
+		});
 	}
 
 	private void setupPins() {
@@ -168,8 +220,10 @@ public class MainActivity extends BaseActivity {
 			button1.setEnabled(true);
 			button2.setEnabled(true);
 			button3.setEnabled(true);
-			if (pin1 == null || pin1.equals("null")) {
+
+			if (pin1 == null || pin1.equals("null") || pin1.equals("0")) {
 				button1.setText("Click to pin locations here!");
+				button1.setBackgroundResource(R.drawable.bg_empty_pin_box);
 				button1.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -179,10 +233,98 @@ public class MainActivity extends BaseActivity {
 				});
 			} else {
 				button1.setText("Location: " + pin1);
+				button1.setBackgroundResource(R.drawable.bg_orange_pin_box);
 				button1.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						// Intent intent = new (getContext(), )
+						Intent intent = new Intent(getBaseContext(),
+								LocationDisplayInformationActivity.class);
+						intent.putExtra("locationId", Integer.parseInt(pin1));
+						startActivity(intent);
+					}
+
+				});
+				button1.setOnLongClickListener(new OnLongClickListener() {
+					@Override
+					public boolean onLongClick(View v) {
+						Log.i("Main activity - long click", "");
+						Toast.makeText(v.getContext(), "remove pin 1",
+								Toast.LENGTH_SHORT).show();
+						loadDialog(0, v);
+						return true;
+					}
+
+				});
+			}
+			// button 2
+			if (pin2 == null || pin2.equals("null") || pin2.equals("0")) {
+				button2.setText("Click to pin locations here!");
+				button2.setBackgroundResource(R.drawable.bg_empty_pin_box);
+				button2.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						// launch notification;
+						pinLoaction(1, v);
+					}
+				});
+			} else {
+				button2.setText("Location: " + pin2);
+				button2.setBackgroundResource(R.drawable.bg_orange_pin_box);
+				button2.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Intent intent = new Intent(getBaseContext(),
+								LocationDisplayInformationActivity.class);
+						intent.putExtra("locationId", Integer.parseInt(pin2));
+						startActivity(intent);
+					}
+
+				});
+				button2.setOnLongClickListener(new OnLongClickListener() {
+					@Override
+					public boolean onLongClick(View v) {
+						Log.i("Main activity - long click", "");
+						Toast.makeText(v.getContext(), "remove pin 1",
+								Toast.LENGTH_SHORT).show();
+						loadDialog(1, v);
+						return true;
+					}
+
+				});
+			}
+			// button 3
+			if (pin3 == null || pin3.equals("null") || pin3.equals("0")) {
+				button3.setText("Click to pin locations here!");
+				button3.setBackgroundResource(R.drawable.bg_empty_pin_box);
+				button3.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						// launch notification;
+						pinLoaction(2, v);
+					}
+				});
+			} else {
+				button3.setText("Location: " + pin3);
+				button3.setBackgroundResource(R.drawable.bg_orange_pin_box);
+				button3.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Intent intent = new Intent(getBaseContext(),
+								LocationDisplayInformationActivity.class);
+						intent.putExtra("locationId", Integer.parseInt(pin3));
+						startActivity(intent);
+					}
+
+				});
+				button3.setOnLongClickListener(new OnLongClickListener() {
+					@Override
+					public boolean onLongClick(View v) {
+						Log.i("Main activity - long click", "");
+						Toast.makeText(v.getContext(), "remove pin 1",
+								Toast.LENGTH_SHORT).show();
+						loadDialog(2, v);
+
+						return true;
 					}
 
 				});
@@ -192,6 +334,56 @@ public class MainActivity extends BaseActivity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	protected void loadDialog(final int i, View v) {
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+				v.getContext());
+
+		// set title
+		alertDialogBuilder.setTitle("Click yes to remove pin");
+
+		// set dialog message
+		alertDialogBuilder
+				// .setMessage("Click yes to remove pin")
+				.setCancelable(false)
+				.setPositiveButton("Yes",
+						new DialogInterface.OnClickListener() {
+							public void onClick(final DialogInterface dialog,
+									int id) {
+								Map<String, Object> params = new HashMap<String, Object>();
+								params.put("location_id", 0);
+								params.put("user_id", InstoApplication.instance
+										.getUserInfo().getId());
+								params.put("pin", i);
+								AQuery aq = new AQuery(getBaseContext());
+								aq.ajax("http://insto-web.herokuapp.com/user/pin",
+										params, JSONObject.class,
+										new AjaxCallback<JSONObject>() {
+											@Override
+											public void callback(String url,
+													JSONObject json,
+													AjaxStatus status) {
+												Log.i("pin success",
+														json.toString());
+												loadPins();
+												dialog.cancel();
+											}
+										});
+
+							}
+						})
+				.setNegativeButton("No", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						dialog.cancel();
+					}
+				});
+
+		// create alert dialog
+		AlertDialog alertDialog = alertDialogBuilder.create();
+
+		// show it
+		alertDialog.show();
 	}
 
 	public void callback(String url, String str, AjaxStatus status) {
@@ -481,6 +673,7 @@ public class MainActivity extends BaseActivity {
 		});
 
 		Button send_button = (Button) dialog.findViewById(R.id.send_button);
+		send_button.setBackgroundResource(R.drawable.btn_pin);
 		send_button.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -499,15 +692,15 @@ public class MainActivity extends BaseActivity {
 							public void callback(String url, JSONObject json,
 									AjaxStatus status) {
 								Log.i("pin success", json.toString());
+								dialog.cancel();
+								loadPins();
 
 							}
 						});
 			}
-
 		});
 
 		dialog.show();
 
 	}
-
 }

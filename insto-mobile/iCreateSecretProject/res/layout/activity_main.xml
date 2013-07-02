@@ -8,7 +8,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_weight="0.05" >
+        android:layout_weight="0.01" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -56,13 +56,16 @@
         </LinearLayout>
         
 </RelativeLayout>
-    <TextView
-        android:id="@+id/contact_label"
-        android:layout_width="288dp"
-        android:layout_height="wrap_content"
+
+    <ListView
+        android:id="@+id/notification_list"
+        android:layout_width="match_parent"
+        android:layout_height="123dp"
         android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_marginTop="3dp"
-        android:layout_weight="0.06"
+        android:layout_marginBottom="3dp"
+        android:background="@color/nus_orange"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </LinearLayout>
