@@ -120,6 +120,7 @@ public class MainActivity extends BaseActivity {
 								locations.add(temp);
 							}
 							ready = true;
+							setupPins();
 
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
@@ -147,7 +148,6 @@ public class MainActivity extends BaseActivity {
 		}
 		gcm = GoogleCloudMessaging.getInstance(this);
 
-		setupPins();
 		seetupNoifications();
 	}
 
@@ -163,7 +163,7 @@ public class MainActivity extends BaseActivity {
 		Gson g = new Gson();
 		Type collectionType = new TypeToken<ArrayList<Location>>() {
 		}.getType();
-		locations = g.fromJson(json.toString(), collectionType);
+		// locations = g.fromJson(json.toString(), collectionType);
 		notificationList.setAdapter(new LatestRequestAdapter(this, json));
 		notificationList.setOnItemClickListener(new OnItemClickListener() {
 
