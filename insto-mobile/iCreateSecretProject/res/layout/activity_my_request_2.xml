@@ -19,7 +19,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"
-        android:background="@drawable/btn_orange"
+        android:background="@drawable/btn_orange_anim"
         android:fontFamily="HelveticaNeue-CondensedBold.ttf"
         android:text="Add Request"
         android:textColor="@color/color_wizard_white"

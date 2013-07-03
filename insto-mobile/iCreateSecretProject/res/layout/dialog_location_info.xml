@@ -25,7 +25,7 @@
        android:layout_marginLeft="40dp"
        android:layout_marginRight="40dp"
        android:layout_marginTop="5dp"
-       android:background="@drawable/btn_orange"
+       android:background="@drawable/btn_orange_anim"
        android:fontFamily="HelveticaNeue-CondensedBold.ttf"
        android:text="Add Gleam"
        android:textColor="@color/color_wizard_white"

@@ -51,7 +51,7 @@
 		        android:layout_alignParentBottom="true"
 		       android:layout_below="@+id/loginPassword"
 		       android:layout_marginTop="5dp"
-		       android:background="@drawable/btn_orange"
+		       android:background="@drawable/btn_orange_anim"
 		       android:fontFamily="HelveticaNeue-CondensedBold.ttf"
 		       android:text="Send Request"
 		       android:textColor="@color/color_wizard_white"
