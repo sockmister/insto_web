@@ -7,19 +7,19 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="162dp"
-        android:layout_weight="0.05" >
+        android:layout_height="144dp" >
 
          <LinearLayout
             android:id="@+id/pins_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="10dp" >
+            android:padding="0dp"
+            android:visibility="gone" >
         	<TextView
         	    android:layout_width="match_parent"
         	    android:layout_height="wrap_content"
-        	    android:text="Your Locations"
+        	    android:text="Pins"
         	    android:background="@color/color_brown"/>
         
         </LinearLayout>
@@ -27,8 +27,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
             android:layout_below="@+id/pins_label"
+            android:orientation="horizontal"
             android:padding="10dp" >
 
             <Button
@@ -75,13 +75,21 @@
         </LinearLayout>
     </RelativeLayout>
 
+	<TextView
+      	    android:layout_width="match_parent"
+      	    android:layout_height="wrap_content"
+      	    android:text="Current Request"
+      	    android:background="@color/nus_orange"
+      	    android:textColor="#ffffff"
+      	    android:fontFamily="HelveticaNeue-CondensedBold.ttf"
+      	    android:textSize="20dp"
+      	    android:gravity="center"/>
     <ListView
         android:id="@+id/notification_list"
         android:layout_width="match_parent"
         android:layout_height="123dp"
         android:layout_marginBottom="3dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+
         android:layout_marginTop="3dp"
         android:layout_weight="0.84"
         android:textAppearance="?android:attr/textAppearanceMedium" />

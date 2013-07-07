@@ -55,6 +55,9 @@ public class BaseActivity extends SlidingFragmentActivity {
 					TakePhotoActivity.class);
 			startActivity(intent2);
 			break;
+		default:
+			getSlidingMenu().toggle();
+			return true;
 		}
 		return false;
 	}

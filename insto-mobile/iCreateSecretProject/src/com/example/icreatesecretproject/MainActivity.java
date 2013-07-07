@@ -26,9 +26,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
@@ -47,7 +44,6 @@ import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
 import com.example.icreatesecretproject.CheckOthersRequest.CheckOtherRequestTakePhotoActivity;
 import com.example.icreatesecretproject.LocationGrid.LocationDisplayInformationActivity;
-import com.example.icreatesecretproject.TakePhoto.TakePhotoActivity;
 import com.google.android.gcm.GCMRegistrar;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.gson.Gson;
@@ -404,29 +400,6 @@ public class MainActivity extends BaseActivity {
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.dashboard_frame, fragment).commit();
 		getSlidingMenu().showContent();
-	}
-
-	@Override
-	public void onBackPressed() {
-		getSlidingMenu().toggle();
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.take_photo, menu);
-		return true;
-	}
-
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.camera_icon:
-			Intent intent2 = new Intent(getBaseContext(),
-					TakePhotoActivity.class);
-			startActivity(intent2);
-			break;
-		}
-		return false;
 	}
 
 	/**

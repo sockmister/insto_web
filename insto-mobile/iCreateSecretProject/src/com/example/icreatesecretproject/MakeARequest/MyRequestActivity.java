@@ -219,9 +219,6 @@ public class MyRequestActivity extends BaseActivity {
 			}
 
 		});
-		overridePendingTransition(R.anim.scale_from_top_right_corner,
-				R.anim.stay);
-
 	}
 
 	protected void setUpSendButton(Button send_button, final Dialog dialog) {
@@ -229,8 +226,9 @@ public class MyRequestActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 
+				progressDialog = ProgressDialog.show(MyRequestActivity.this,
+						"", "Loading...");
 				// location id
 				int location_id = (spinnerFaculty.getSelectedItemPosition() * 10)
 						+ (spinnerId.getSelectedItemPosition());
@@ -263,12 +261,14 @@ public class MyRequestActivity extends BaseActivity {
 								EditText ed = (EditText) dialog
 										.findViewById(R.id.message);
 								ed.setText("");
-
+								progressDialog.dismiss();
 								if (json.has("error")) {
 									Toast.makeText(getApplicationContext(),
 											"You have made a request already!",
 											Toast.LENGTH_LONG).show();
 								} else {
+									if (dialog != null)
+										dialog.dismiss();
 									Toast.makeText(getApplicationContext(),
 											"Request sent", Toast.LENGTH_LONG)
 											.show();
@@ -321,8 +321,10 @@ public class MyRequestActivity extends BaseActivity {
 		Log.i("MY REQUEST", json.toString());
 		// locations = g.fromJson(json.toString(), collectionType);
 		// lv = (ListView) findViewById(R.id.list_view);
+		final JSONArray reqArray;
 		try {
-			lv.setAdapter(new MyRequestAdapter(this, json.getJSONArray(0)));
+			reqArray = json.getJSONArray(0);
+			lv.setAdapter(new MyRequestAdapter(this, reqArray));
 			lv.setOnItemClickListener(new OnItemClickListener() {
 
 				@Override
@@ -333,8 +335,12 @@ public class MyRequestActivity extends BaseActivity {
 					try {
 						intent.putExtra(
 								"locationId",
-								json.getJSONObject(position).getInt(
+								reqArray.getJSONObject(position).getInt(
 										"location_id"));
+						Log.i("MY REQUEST- loc id",
+								reqArray.getJSONObject(position).getInt(
+										"location_id")
+										+ "");
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

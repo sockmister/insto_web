@@ -78,6 +78,7 @@ public class MainMenuFragment extends ListFragment {
 			startActivity(intent0);
 			getActivity().overridePendingTransition(R.anim.from_out_slide_left,
 					R.anim.from_in_slide_left);
+			getActivity().finish();
 			break;
 		// check places
 		case 1:
@@ -86,6 +87,7 @@ public class MainMenuFragment extends ListFragment {
 			startActivity(intent1);
 			getActivity().overridePendingTransition(R.anim.from_out_slide_left,
 					R.anim.from_in_slide_left);
+			getActivity().finish();
 			break;
 		// help a soul
 		case 2:
@@ -94,6 +96,7 @@ public class MainMenuFragment extends ListFragment {
 			startActivity(intent2);
 			getActivity().overridePendingTransition(R.anim.from_out_slide_left,
 					R.anim.from_in_slide_left);
+			getActivity().finish();
 			break;
 		// my request
 		case 3:
@@ -101,6 +104,7 @@ public class MainMenuFragment extends ListFragment {
 			startActivity(intent3);
 			getActivity().overridePendingTransition(R.anim.from_out_slide_left,
 					R.anim.from_in_slide_left);
+			getActivity().finish();
 			break;
 		}
 		if (newFragment != null) {

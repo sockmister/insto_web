@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.hardware.Camera;
@@ -16,12 +17,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.Spinner;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
@@ -30,7 +27,6 @@ import com.example.icreatesecretproject.Location;
 import com.example.icreatesecretproject.POSTMultipart;
 import com.example.icreatesecretproject.R;
 import com.example.icreatesecretproject.TakePhoto.HandlePictureStorage;
-import com.example.icreatesecretproject.TakePhoto.TakePhotoActivity;
 import com.example.icreatesecretproject.TakePhoto.TakePhotoSurfaceView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -44,6 +40,7 @@ import com.google.gson.reflect.TypeToken;
  * instance of this fragment.
  * 
  */
+@SuppressLint("ValidFragment")
 public class CheckOthersTakeAPicFragment extends Fragment {
 
 	int state = 0;
@@ -58,8 +55,14 @@ public class CheckOthersTakeAPicFragment extends Fragment {
 	ArrayList<ArrayList<Location>> locations = new ArrayList<ArrayList<Location>>();
 	boolean ready = false;
 
+	int id;
+
 	public CheckOthersTakeAPicFragment() {
 		// Required empty public constructor
+	}
+
+	public CheckOthersTakeAPicFragment(int id) {
+		this.id = id;
 	}
 
 	@Override
@@ -144,171 +147,174 @@ public class CheckOthersTakeAPicFragment extends Fragment {
 		sendAPicture.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Dialog dialog = new Dialog(v.getContext());
-				dialog.setContentView(R.layout.dialog_select_photo_location);
-				dialog.setTitle("Select Location");
+				savedPictureFile = handPicStore.getPictureFile();
+				progressDialog = ProgressDialog.show(getActivity(), "",
+						"Sending...");
 
-				final Spinner spinnerFaculty = (Spinner) dialog
-						.findViewById(R.id.spinner_faculty);
-				ArrayAdapter<CharSequence> adapter = ArrayAdapter
-						.createFromResource(v.getContext(), R.array.locations,
-								android.R.layout.simple_spinner_item);
-				// Specify the layout to use when the list of choices appears
-				adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+				new POSTMultipart(savedPictureFile, Integer.toString(id),
+						dialog, progressDialog, getActivity()).execute();
+				// final Dialog dialog = new Dialog(v.getContext());
+				// dialog.setContentView(R.layout.dialog_select_photo_location);
+				// dialog.setTitle("Select Location");
+				//
+				// final Spinner spinnerFaculty = (Spinner) dialog
+				// .findViewById(R.id.spinner_faculty);
+				// ArrayAdapter<CharSequence> adapter = ArrayAdapter
+				// .createFromResource(v.getContext(), R.array.locations,
+				// android.R.layout.simple_spinner_item);
+				// // Specify the layout to use when the list of choices appears
+				// adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+				// // // Apply the adapter to the spinner
+				// spinnerFaculty.setAdapter(adapter);
+				//
+				// final Spinner spinnerId = (Spinner) dialog
+				// .findViewById(R.id.spinner_id);
+				// ArrayAdapter<CharSequence> adapterId = ArrayAdapter
+				// .createFromResource(v.getContext(), R.array.arts_name,
+				// android.R.layout.simple_spinner_item);
+				// // Specify the layout to use when the list of choices appears
+				// adapterId
+				// .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 				// // Apply the adapter to the spinner
-				spinnerFaculty.setAdapter(adapter);
-
-				final Spinner spinnerId = (Spinner) dialog
-						.findViewById(R.id.spinner_id);
-				ArrayAdapter<CharSequence> adapterId = ArrayAdapter
-						.createFromResource(v.getContext(), R.array.arts_name,
-								android.R.layout.simple_spinner_item);
-				// Specify the layout to use when the list of choices appears
-				adapterId
-						.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-				// Apply the adapter to the spinner
-				spinnerId.setAdapter(adapterId);
-
-				spinnerFaculty
-						.setOnItemSelectedListener(new OnItemSelectedListener() {
-							@Override
-							public void onItemSelected(AdapterView<?> parent,
-									View view, int position, long id) {
-								Spinner spinnerId = (Spinner) dialog
-										.findViewById(R.id.spinner_id);
-								ArrayAdapter<Location> adapterId = null;
-								switch (position) {
-								case 0:
-									// adapterId =
-									// ArrayAdapter.createFromResource(
-									// view.getContext(),
-									// R.array.arts_name,
-									// android.R.layout.simple_spinner_item);
-									adapterId = new ArrayAdapter<Location>(
-											view.getContext(),
-											android.R.layout.simple_spinner_item,
-											locations.get(position));
-									break;
-								case 1:
-									// adapterId =
-									// ArrayAdapter.createFromResource(
-									// view.getContext(),
-									// R.array.business_name,
-									// android.R.layout.simple_spinner_item);
-									adapterId = new ArrayAdapter<Location>(
-											view.getContext(),
-											android.R.layout.simple_spinner_item,
-											locations.get(position));
-									break;
-								case 2:
-									// adapterId =
-									// ArrayAdapter.createFromResource(
-									// view.getContext(),
-									// R.array.computing_name,
-									// android.R.layout.simple_spinner_item);
-									adapterId = new ArrayAdapter<Location>(
-											view.getContext(),
-											android.R.layout.simple_spinner_item,
-											locations.get(position));
-									break;
-								case 3:
-									// adapterId =
-									// ArrayAdapter.createFromResource(
-									// view.getContext(),
-									// R.array.engineering_name,
-									// android.R.layout.simple_spinner_item);
-									adapterId = new ArrayAdapter<Location>(
-											view.getContext(),
-											android.R.layout.simple_spinner_item,
-											locations.get(position));
-									break;
-								case 4:
-									// adapterId =
-									// ArrayAdapter.createFromResource(
-									// view.getContext(),
-									// R.array.medicine_name,
-									// android.R.layout.simple_spinner_item);
-									adapterId = new ArrayAdapter<Location>(
-											view.getContext(),
-											android.R.layout.simple_spinner_item,
-											locations.get(position));
-									break;
-								case 5:
-									// adapterId =
-									// ArrayAdapter.createFromResource(
-									// view.getContext(),
-									// R.array.science_name,
-									// android.R.layout.simple_spinner_item);
-									adapterId = new ArrayAdapter<Location>(
-											view.getContext(),
-											android.R.layout.simple_spinner_item,
-											locations.get(position));
-									break;
-								case 6:
-									// adapterId =
-									// ArrayAdapter.createFromResource(
-									// view.getContext(),
-									// R.array.sde_name,
-									// android.R.layout.simple_spinner_item);
-									adapterId = new ArrayAdapter<Location>(
-											view.getContext(),
-											android.R.layout.simple_spinner_item,
-											locations.get(position));
-									break;
-								case 7:
-									// adapterId =
-									// ArrayAdapter.createFromResource(
-									// view.getContext(),
-									// R.array.utown_name,
-									// android.R.layout.simple_spinner_item);
-									adapterId = new ArrayAdapter<Location>(
-											view.getContext(),
-											android.R.layout.simple_spinner_item,
-											locations.get(position));
-									break;
-								}
-								adapterId
-										.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-								// Apply the adapter to the spinner
-								spinnerId.setAdapter(adapterId);
-							}
-
-							@Override
-							public void onNothingSelected(AdapterView<?> arg0) {
-								// TODO Auto-generated method stub
-
-							}
-
-						});
-
-				Button send_button = (Button) dialog
-						.findViewById(R.id.send_button);
-				send_button.setOnClickListener(new OnClickListener() {
-
-					@Override
-					public void onClick(View arg0) {
-						// TODO Auto-generated method stub
-						
-						savedPictureFile = handPicStore.getPictureFile();
-						progressDialog = ProgressDialog.show(getActivity(), "",
-		                        "Loading...");
-
-						int location_id = ((Location) spinnerId
-								.getSelectedItem()).getLocation_id();
-						System.out.println(location_id);
-						new POSTMultipart(savedPictureFile, Integer
-								.toString(location_id), dialog, progressDialog, getActivity())
-								.execute();
-					}
-
-				});
-
-				dialog.show();
+				// spinnerId.setAdapter(adapterId);
 				//
-				// Log.i("TakePhotoActivity - send picture", "sad");
-				// Log.i("TakePhotoActivity - send picture",
-				// savedPictureFile.toString());
+				// spinnerFaculty
+				// .setOnItemSelectedListener(new OnItemSelectedListener() {
+				// @Override
+				// public void onItemSelected(AdapterView<?> parent,
+				// View view, int position, long id) {
+				// Spinner spinnerId = (Spinner) dialog
+				// .findViewById(R.id.spinner_id);
+				// ArrayAdapter<Location> adapterId = null;
+				// switch (position) {
+				// case 0:
+				// // adapterId =
+				// // ArrayAdapter.createFromResource(
+				// // view.getContext(),
+				// // R.array.arts_name,
+				// // android.R.layout.simple_spinner_item);
+				// adapterId = new ArrayAdapter<Location>(
+				// view.getContext(),
+				// android.R.layout.simple_spinner_item,
+				// locations.get(position));
+				// break;
+				// case 1:
+				// // adapterId =
+				// // ArrayAdapter.createFromResource(
+				// // view.getContext(),
+				// // R.array.business_name,
+				// // android.R.layout.simple_spinner_item);
+				// adapterId = new ArrayAdapter<Location>(
+				// view.getContext(),
+				// android.R.layout.simple_spinner_item,
+				// locations.get(position));
+				// break;
+				// case 2:
+				// // adapterId =
+				// // ArrayAdapter.createFromResource(
+				// // view.getContext(),
+				// // R.array.computing_name,
+				// // android.R.layout.simple_spinner_item);
+				// adapterId = new ArrayAdapter<Location>(
+				// view.getContext(),
+				// android.R.layout.simple_spinner_item,
+				// locations.get(position));
+				// break;
+				// case 3:
+				// // adapterId =
+				// // ArrayAdapter.createFromResource(
+				// // view.getContext(),
+				// // R.array.engineering_name,
+				// // android.R.layout.simple_spinner_item);
+				// adapterId = new ArrayAdapter<Location>(
+				// view.getContext(),
+				// android.R.layout.simple_spinner_item,
+				// locations.get(position));
+				// break;
+				// case 4:
+				// // adapterId =
+				// // ArrayAdapter.createFromResource(
+				// // view.getContext(),
+				// // R.array.medicine_name,
+				// // android.R.layout.simple_spinner_item);
+				// adapterId = new ArrayAdapter<Location>(
+				// view.getContext(),
+				// android.R.layout.simple_spinner_item,
+				// locations.get(position));
+				// break;
+				// case 5:
+				// // adapterId =
+				// // ArrayAdapter.createFromResource(
+				// // view.getContext(),
+				// // R.array.science_name,
+				// // android.R.layout.simple_spinner_item);
+				// adapterId = new ArrayAdapter<Location>(
+				// view.getContext(),
+				// android.R.layout.simple_spinner_item,
+				// locations.get(position));
+				// break;
+				// case 6:
+				// // adapterId =
+				// // ArrayAdapter.createFromResource(
+				// // view.getContext(),
+				// // R.array.sde_name,
+				// // android.R.layout.simple_spinner_item);
+				// adapterId = new ArrayAdapter<Location>(
+				// view.getContext(),
+				// android.R.layout.simple_spinner_item,
+				// locations.get(position));
+				// break;
+				// case 7:
+				// // adapterId =
+				// // ArrayAdapter.createFromResource(
+				// // view.getContext(),
+				// // R.array.utown_name,
+				// // android.R.layout.simple_spinner_item);
+				// adapterId = new ArrayAdapter<Location>(
+				// view.getContext(),
+				// android.R.layout.simple_spinner_item,
+				// locations.get(position));
+				// break;
+				// }
+				// adapterId
+				// .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+				// // Apply the adapter to the spinner
+				// spinnerId.setAdapter(adapterId);
+				// }
 				//
+				// @Override
+				// public void onNothingSelected(AdapterView<?> arg0) {
+				// // TODO Auto-generated method stub
+				//
+				// }
+				//
+				// });
+				//
+				// Button send_button = (Button) dialog
+				// .findViewById(R.id.send_button);
+				// send_button.setOnClickListener(new OnClickListener() {
+				//
+				// @Override
+				// public void onClick(View arg0) {
+				// // TODO Auto-generated method stub
+				//
+				// savedPictureFile = handPicStore.getPictureFile();
+				// progressDialog = ProgressDialog.show(getActivity(), "",
+				// "Loading...");
+				//
+				// int location_id = ((Location) spinnerId
+				// .getSelectedItem()).getLocation_id();
+				// System.out.println(location_id);
+				// new POSTMultipart(savedPictureFile, Integer
+				// .toString(location_id), dialog, progressDialog,
+				// getActivity())
+				// .execute();
+				// }
+				//
+				// });
+				//
+				// dialog.show();
+
 			}
 
 		});

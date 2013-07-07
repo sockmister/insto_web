@@ -4,13 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
-    android:background="@drawable/bg_menu">
+    >
    
 	<LinearLayout
 	    android:layout_width="fill_parent"
 	    android:layout_height="150dp"
 	    android:gravity="center_vertical|right"
-	    android:orientation="horizontal" >
+	    android:orientation="horizontal"
+	    android:background="@color/disable_grey" >
 
 	    <ImageView
 	        android:id="@+id/profile_pic_view"

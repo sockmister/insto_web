@@ -21,12 +21,14 @@ public class CheckOtherRequestTakePhotoActivity extends FragmentActivity
 		implements OnFragmentInteractionListener {
 
 	JSONArray messageArray;
+	int id;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_check_others_request_take_photo);
 		Switch ts = (Switch) this.findViewById(R.id.toggle_switch);
+		id = getIntent().getIntExtra("locationId", 0);
 		//
 		// Fragment checkMessages = new CheckOthersRequestMessageFragment();
 		// getSupportFragmentManager().beginTransaction()
@@ -39,7 +41,7 @@ public class CheckOtherRequestTakePhotoActivity extends FragmentActivity
 			@Override
 			public void onCheckedChanged(CompoundButton cButton, boolean checked) {
 				if (checked) {
-					Fragment takeAPic = new CheckOthersTakeAPicFragment();
+					Fragment takeAPic = new CheckOthersTakeAPicFragment(id);
 					FragmentTransaction ft = getSupportFragmentManager()
 							.beginTransaction();
 					ft.setCustomAnimations(R.anim.from_out_slide_left,
