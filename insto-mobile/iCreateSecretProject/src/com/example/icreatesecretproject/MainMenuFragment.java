@@ -21,6 +21,7 @@ public class MainMenuFragment extends ListFragment {
 	private OnFragmentInteractionListener mListener;
 	TextView username;
 	TextView balance;
+
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
 	 * fragment (e.g. upon screen orientation changes).
@@ -37,17 +38,20 @@ public class MainMenuFragment extends ListFragment {
 		// getActivity(), R.layout.row, android.R.id.text1, menuItems);
 		// setListAdapter(menuItemsAdapter);
 		MenuListAdapter mA = new MenuListAdapter(getActivity());
-		mA.add(new MenuListItem("Home", R.drawable.ic_notification));
-		mA.add(new MenuListItem("Check Places", R.drawable.ic_notification));
-		mA.add(new MenuListItem("Help A Soul", R.drawable.ic_notification));
-		mA.add(new MenuListItem("My Request", R.drawable.ic_notification));
+		mA.add(new MenuListItem("Home", R.drawable.ic_home));
+		mA.add(new MenuListItem("Check Places", R.drawable.ic_check_places));
+		mA.add(new MenuListItem("Help A Soul", R.drawable.ic_help_a_soul));
+		mA.add(new MenuListItem("My Request", R.drawable.ic_messages_2));
 		setListAdapter(mA);
-		
-		username = (TextView) getActivity().findViewById(R.id.user_profile_label);
+
+		username = (TextView) getActivity().findViewById(
+				R.id.user_profile_label);
 		username.setText(InstoApplication.instance.getUserInfo().getName());
-		
-		balance = (TextView) getActivity().findViewById(R.id.user_profile_bal_label);
-		balance.setText(InstoApplication.instance.getUserInfo().getPoints().toString());
+
+		balance = (TextView) getActivity().findViewById(
+				R.id.user_profile_bal_label);
+		balance.setText(InstoApplication.instance.getUserInfo().getPoints()
+				.toString());
 	}
 
 	@Override

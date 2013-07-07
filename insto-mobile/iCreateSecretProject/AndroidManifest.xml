@@ -22,7 +22,7 @@
     <application
         android:name="com.example.icreatesecretproject.InstoApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/ic_launcher_new_3"
         android:label="@string/test_string"
         android:theme="@style/AppTheme" 
         >

@@ -7,65 +7,82 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_weight="0.01" >
+        android:layout_height="162dp"
+        android:layout_weight="0.05" >
 
+         <LinearLayout
+            android:id="@+id/pins_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp" >
+        	<TextView
+        	    android:layout_width="match_parent"
+        	    android:layout_height="wrap_content"
+        	    android:text="Your Locations"/>
+        
+        </LinearLayout>
+        
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="10dp"
-            android:orientation="vertical" >
+            android:orientation="horizontal"
+            android:layout_below="@+id/pins_label"
+            android:padding="10dp" >
 
             <Button
                 android:id="@+id/pin1"
-                android:layout_width="match_parent"
-                android:layout_height="0dp" 
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_empty_pin_box"
-                android:layout_marginBottom="10dp"
+                android:enabled="false"
                 android:fontFamily="HelveticaNeue-CondensedBold.ttf"
-                android:textStyle="bold"
-                android:textColor="@color/color_text_grey_light"
                 android:text="Loading..."
-                android:enabled="false"/>
+                android:textColor="@color/color_text_grey_light"
+                android:textSize="10dp"
+                android:textStyle="bold" />
+
             <Button
                 android:id="@+id/pin2"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1" 
-                android:background="@drawable/bg_empty_pin_box"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="HelveticaNeue-CondensedBold.ttf"
-                android:textStyle="bold"
-                android:textColor="@color/color_text_grey_light"
-                android:text="Loading..."
-                android:enabled="false"/>
-            <Button
-                android:id="@+id/pin3"
-                android:layout_width="match_parent"
-                android:layout_height="0dp" 
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_empty_pin_box"
-                android:layout_marginBottom="10dp"
+                android:enabled="false"
                 android:fontFamily="HelveticaNeue-CondensedBold.ttf"
-                android:textStyle="bold"
-                android:textColor="@color/color_text_grey_light"
                 android:text="Loading..."
-                android:enabled="false"/>
+                android:textColor="@color/color_text_grey_light"
+                android:textSize="10dp"
+                android:textStyle="bold" />
 
+            <Button
+                android:id="@+id/pin3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_empty_pin_box"
+                android:enabled="false"
+                android:fontFamily="HelveticaNeue-CondensedBold.ttf"
+                android:text="Loading..."
+                android:textColor="@color/color_text_grey_light"
+                android:textSize="10dp"
+                android:textStyle="bold" />
         </LinearLayout>
-        
-</RelativeLayout>
+    </RelativeLayout>
 
     <ListView
         android:id="@+id/notification_list"
         android:layout_width="match_parent"
         android:layout_height="123dp"
+        android:layout_marginBottom="3dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="3dp"
-        android:layout_marginBottom="3dp"
-        android:background="@color/nus_orange"
+        android:layout_weight="0.84"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </LinearLayout>

@@ -17,8 +17,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.icreatesecretproject.R;
-
 public class LatestRequestAdapter extends BaseAdapter {
 
 	private Context mContext;
@@ -32,6 +30,8 @@ public class LatestRequestAdapter extends BaseAdapter {
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
+		if (requestArray == null)
+			return 0;
 		return requestArray.length();
 	}
 
