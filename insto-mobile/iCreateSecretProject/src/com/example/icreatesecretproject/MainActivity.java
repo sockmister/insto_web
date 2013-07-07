@@ -110,7 +110,7 @@ public class MainActivity extends BaseActivity {
 					public void callback(String url, JSONArray json,
 							AjaxStatus status) {
 						try {
-							System.out.println(json.get(0));
+							// System.out.println(json.get(0));
 							Gson g = new Gson();
 							Type collectionType = new TypeToken<ArrayList<Location>>() {
 							}.getType();

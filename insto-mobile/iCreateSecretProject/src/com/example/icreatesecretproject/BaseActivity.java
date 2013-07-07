@@ -5,14 +5,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.example.icreatesecretproject.TakePhoto.TakePhotoActivity;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
 public class BaseActivity extends SlidingFragmentActivity {
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -27,8 +26,19 @@ public class BaseActivity extends SlidingFragmentActivity {
 		setBehindContentView(R.layout.menu_frame);
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.menu_frame, new MainMenuFragment()).commit();
+
+		sm.setShadowWidthRes(R.dimen.shadow_width);
+
+		sm.setShadowDrawable(R.drawable.shadow);
+
+		sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+
+		sm.setFadeDegree(0.35f);
+
+		sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+
 		setSlidingActionBarEnabled(true);
-		
+
 	}
 
 	@Override
