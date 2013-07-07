@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.widget.RelativeLayout;
 
 import com.example.icreatesecretproject.R;
 import com.viewpagerindicator.IconPagerAdapter;
@@ -15,6 +16,7 @@ public class PlaceSlidesFragmentAdapter extends FragmentPagerAdapter implements
 		IconPagerAdapter {
 
 	JSONArray jA;
+	private RelativeLayout addGleamLayout;
 	private int[] Images = new int[] { R.drawable.head, R.drawable.head,
 			R.drawable.head, R.drawable.head
 
@@ -25,10 +27,11 @@ public class PlaceSlidesFragmentAdapter extends FragmentPagerAdapter implements
 
 	private int mCount = Images.length;
 
-	public PlaceSlidesFragmentAdapter(FragmentManager fm, JSONArray json) {
+	public PlaceSlidesFragmentAdapter(FragmentManager fm, JSONArray json, RelativeLayout addGleamLayout) {
 		super(fm);
 		jA = json;
 		mCount = jA.length();
+		this.addGleamLayout = addGleamLayout;
 	}
 
 	@Override
@@ -41,7 +44,7 @@ public class PlaceSlidesFragmentAdapter extends FragmentPagerAdapter implements
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return new PlaceSlideFragment(jo);
+		return new PlaceSlideFragment(jo, addGleamLayout);
 	}
 
 	@Override

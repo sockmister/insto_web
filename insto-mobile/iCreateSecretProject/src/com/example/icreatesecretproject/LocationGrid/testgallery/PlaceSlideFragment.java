@@ -14,8 +14,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.androidquery.AQuery;
@@ -25,14 +27,16 @@ import com.example.icreatesecretproject.R;
 public final class PlaceSlideFragment extends Fragment {
 	int imageResourceId;
 	JSONObject jo;
+	RelativeLayout addGleamLayout;
 
 	@SuppressLint("ValidFragment")
 	public PlaceSlideFragment(int i) {
 		imageResourceId = i;
 	}
 
-	public PlaceSlideFragment(JSONObject jo) {
+	public PlaceSlideFragment(JSONObject jo, RelativeLayout addGleamLayout) {
 		this.jo = jo;
+		this.addGleamLayout = addGleamLayout;
 	}
 
 	@Override
@@ -51,20 +55,39 @@ public final class PlaceSlideFragment extends Fragment {
 		ProgressBar pb = (ProgressBar) v.findViewById(R.id.progressBar);
 		TextView matiricNumber = (TextView) v.findViewById(R.id.user_matric);
 		TextView imageDate = (TextView) v.findViewById(R.id.image_date);
+		ImageView gleamImage = (ImageView) v.findViewById(R.id.image_gleam);
+		Button addGleam = (Button) addGleamLayout.findViewById(R.id.button_add_gleam);
 
 		String url = "";
 		String date = "";
+		String matricNo = "";
 
 		try {
 			url = jo.getString("image_url");
 			date = getDate(jo.getString("created_at"));
-
+			matricNo = jo.getString("user");
+			if(Integer.valueOf(jo.getString("gleam")) > 5){
+				gleamImage.setVisibility(View.VISIBLE);
+			} else{
+				gleamImage.setVisibility(View.INVISIBLE);
+			}
+			
+			//if request_sent_fulfilled is true, we should be showing add gleam
+			if(jo.getString("sent_gleam").equals("true")){
+				addGleam.setEnabled(false);
+				addGleam.setAlpha(0.35f);
+			}
+			else{
+				addGleam.setEnabled(true);
+				addGleam.setAlpha(1.0f);
+			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		imageDate.setText(date);
+		matiricNumber.setText(matricNo);
 		AQuery aq = new AQuery(getActivity());
 		aq.id(image).progress(pb).image(url, true, true, 600, 0);
 		// image.setImageResource(imageResourceId);

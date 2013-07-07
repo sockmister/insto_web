@@ -31,13 +31,7 @@
                 android:textSize="25sp" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/location_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/top"
-            android:gravity="right"
-            android:hint="date" />
+    
     </RelativeLayout>
 
     <ImageView

@@ -61,11 +61,12 @@ public class LocationInFacultyAdapter extends BaseAdapter {
 		v = vi.inflate(R.layout.in_location_item, null);
 
 		TextView name = (TextView) v.findViewById(R.id.location_name);
-		TextView date = (TextView) v.findViewById(R.id.location_date);
+//		TextView date = (TextView) v.findViewById(R.id.location_date);
 		try {
 			JSONObject jo = (JSONObject) locationArray.get(position);
 			name.setText(jo.getString("location_name"));
-			date.setText(getDate(jo.getString("updated_at")));
+//			date.setText(getDate(jo.getString("updated_at")));
+//			date.setText("");
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

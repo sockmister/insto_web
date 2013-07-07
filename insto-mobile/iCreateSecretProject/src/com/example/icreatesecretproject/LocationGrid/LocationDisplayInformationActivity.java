@@ -51,7 +51,11 @@ public class LocationDisplayInformationActivity extends BaseSubActivity {
 	TextView gleamPoints;
 	Button addGleam;
 	Button minusGleam;
+	Button requestFulfilled;
 	JSONArray ja;
+	
+	RelativeLayout addGleamLayout;
+	RelativeLayout requestFulfilledLayout;
 
 	int currPosition = 0;
 
@@ -69,6 +73,10 @@ public class LocationDisplayInformationActivity extends BaseSubActivity {
 		gleamPoints = (TextView) findViewById(R.id.gleam);
 		addGleam = (Button) findViewById(R.id.button_add_gleam);
 		minusGleam = (Button) findViewById(R.id.button_minus_gleam);
+		requestFulfilled = (Button) findViewById(R.id.button_request_fulfilled);
+		
+		addGleamLayout = (RelativeLayout) findViewById(R.id.gleam_layout);
+		requestFulfilledLayout = (RelativeLayout) findViewById(R.id.request_fulfilled_layout);
 
 		getImages2(getIntent().getIntExtra("locationId", 0));
 		// Set the pager with an adapter
@@ -171,12 +179,18 @@ public class LocationDisplayInformationActivity extends BaseSubActivity {
 	}
 
 	public void getImages2(int id) {
-		String url = "http://insto-web.herokuapp.com/location/" + id
+		String userId = InstoApplication.instance.getUserInfo().getId().toString();
+		String url = "http://insto-web.herokuapp.com/user/" + userId + "/location/" + id
 				+ "/submission";
 		Log.i("LOCATION IN FACULTY ACTION)", "enter");
 		aq.ajax(url, JSONArray.class, this, "jsonCallback2");
 	}
-
+	
+		
+	// get submission images callback
+	// chnage getImgaes2() to new url
+	// set request/gleam view based on boolean
+	// setup request fulfilled post
 	public void jsonCallback2(String url, JSONArray json, AjaxStatus status) {
 		ja = json;
 		Log.i("LOCATION DISPLAY INFORMATION 2", url + " " + status.getCode()
@@ -184,7 +198,7 @@ public class LocationDisplayInformationActivity extends BaseSubActivity {
 		System.out.println(json);
 
 		mAdapter = new PlaceSlidesFragmentAdapter(getSupportFragmentManager(),
-				json);
+				json, addGleamLayout);
 
 		mPager = (ViewPager) findViewById(R.id.pager);
 		mPager.setAdapter(mAdapter);
@@ -216,7 +230,7 @@ public class LocationDisplayInformationActivity extends BaseSubActivity {
 					public void onPageScrollStateChanged(int state) {
 					}
 				});
-
+		
 		addGleam.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -241,6 +255,31 @@ public class LocationDisplayInformationActivity extends BaseSubActivity {
 
 			}
 		});
+		
+		requestFulfilled.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Log.i("LOCATION IN FACULTY ACTION - onclick)", "");
+				Map<String, Object> params = new HashMap<String, Object>();
+
+				try {
+					String id = ja.getJSONObject(currPosition).getString("id");
+					params.put("user_id", InstoApplication.instance
+							.getUserInfo().getId());
+					params.put("submission_id", id);
+					String url = "http://insto-web.herokuapp.com/submission/gleam";
+					aq.ajax(url, params, JSONArray.class,
+							LocationDisplayInformationActivity.this,
+							"jsonCallback3");
+					Log.i("LOCATION IN FACULTY ACTION)", id);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		});
 
 		if (json.length() > 0) {
 			try {
@@ -251,6 +290,28 @@ public class LocationDisplayInformationActivity extends BaseSubActivity {
 				earliestTime.setText(getTime(lastO.getString("created_at")));
 				date.setText(getDate(firstO.getString("created_at")));
 				gleamPoints.setText(ja.getJSONObject(0).getString("gleam"));
+				
+				// if request is sent and not fulfilled, then we allow user to say request fulfilled
+				// if request is sent and fulfilled, then user must have considered to sent gleam 
+				// for that particular submission
+				if(firstO.get("request_sent_by_user").equals("true") && firstO.get("request_fulfilled").equals("f")){
+					addGleamLayout.setVisibility(View.GONE);
+					requestFulfilledLayout.setVisibility(View.VISIBLE);
+					if(firstO.get("sent_gleam").equals("true")){
+						requestFulfilled.setEnabled(false);
+						requestFulfilled.setAlpha(0.35f);
+					}
+				}
+				else{
+					addGleamLayout.setVisibility(View.VISIBLE);
+					requestFulfilledLayout.setVisibility(View.GONE);
+					if(firstO.get("sent_gleam").equals("true")){
+						addGleam.setEnabled(false);
+						addGleam.setAlpha(0.35f);
+					}
+					
+				}
+
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -259,13 +320,16 @@ public class LocationDisplayInformationActivity extends BaseSubActivity {
 		}
 
 	}
-
+	
+	// post gleam callback
 	public void jsonCallback3(String url, JSONArray json, AjaxStatus status) {
 		Log.i("LOCATION DISPLAY INFORMATION 3", url + " " + status.getCode()
 				+ "\n" + status.toString());
+		System.out.println(json.toString());
 		addGleam.setEnabled(false);
 		addGleam.setAlpha(0.35f);
-
+		requestFulfilled.setEnabled(false);
+		requestFulfilled.setAlpha(0.35f);
 	}
 
 	private String getDate(String dateCreated) {

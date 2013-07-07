@@ -2,21 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-
+    android:orientation="vertical">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
-
-    <com.viewpagerindicator.CirclePageIndicator
-        android:id="@+id/indicator"
-        android:layout_width="fill_parent"
+	
+    <RelativeLayout
+        android:id="@+id/submission_info_layout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dip"
-    	android:background="@color/color_brown" />
+        android:layout_weight="0.0000001"
+        android:background="@color/nus_orange" >
+        
+        
+	    <com.viewpagerindicator.CirclePageIndicator
+	        android:id="@+id/indicator"
+	        android:layout_width="fill_parent"
+	        android:layout_height="30dp"
+	        android:padding="10dip"
+	    	android:background="@color/color_brown" />
+	    
+    </RelativeLayout>
     <RelativeLayout
         android:id="@+id/info_layout"
         android:layout_width="match_parent"
@@ -83,7 +92,8 @@
         android:id="@+id/gleam_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.30" >
+        android:layout_weight="0.30"
+        android:visibility="invisible" >
 
         <TextView
             android:id="@+id/gleam"
@@ -117,6 +127,24 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/gleam" 
             android:background="@drawable/btn_plus"/>
+
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/request_fulfilled_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.30"
+        android:visibility="invisible" >
+
+        <Button
+            android:id="@+id/button_request_fulfilled"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/nus_orange"
+            android:text="Request fulfilled."/>
 
     </RelativeLayout>
   

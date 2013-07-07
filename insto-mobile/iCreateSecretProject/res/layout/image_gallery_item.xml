@@ -1,53 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:layout_weight="1">
+        android:layout_height="wrap_content"
+        android:id="@+id/image_layout" >
 
 	    <ImageView
 	        android:id="@+id/image_in_gallery"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
 	        android:layout_centerHorizontal="true"
 	        android:layout_marginTop="5dp"
 	        android:scaleType="centerInside" />
-
-	    <TextView
-	        android:id="@+id/user_matric"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignParentBottom="true"
-	        android:layout_marginBottom="7dp"
-	        android:layout_marginLeft="5dp"
-	        android:layout_toRightOf="@+id/user_image"
-	        android:text="a0073032" 
-	        android:textStyle="bold"
-	        android:textColor="#ffffff" />
-
-	    <ImageView
-	        android:id="@+id/user_image"
-	        android:layout_width="50dp"
-	        android:layout_height="50dp"
-	        android:layout_alignBottom="@+id/user_matric"
-	        android:layout_alignParentLeft="true"
-	        android:layout_marginLeft="10dp"
-	        android:scaleType="centerCrop"
-	        android:src="@drawable/head" />
-
-	    <ImageView
-	        android:id="@+id/image_gleam"
-	        android:layout_width="35dp"
-	        android:layout_height="35dp"
-	        android:layout_alignBottom="@+id/user_matric"
-	        android:layout_alignParentRight="true"
-	        android:layout_marginRight="14dp"
-	        android:scaleType="centerCrop"
-	        android:src="@drawable/weather_sun" />
 
 	    <ProgressBar
 	        android:id="@+id/progressBar"
@@ -57,20 +25,47 @@
 	        android:layout_centerHorizontal="true"
 	        android:layout_centerVertical="true" />
 
-</RelativeLayout>
-  <TextView
+	</RelativeLayout>
+	
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:id="@+id/image_info_layout" >
+	    
+	    <TextView
       	android:id="@+id/image_date"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:gravity="center"
         android:text="5/31/2013 9:23 AM"
         android:textSize="20sp"
-        android:paddingTop="10dp"
         android:paddingLeft="5dp"
-        android:paddingBottom="5dp"
-        android:padding="3dp"
         android:textColor="#ffffff"
         android:background="@color/nus_orange"/>
+  
+  <ImageView
+      android:id="@+id/image_gleam"
+      android:layout_width="35dp"
+      android:layout_height="35dp"
+      android:layout_alignParentRight="true"
+      android:layout_marginRight="14dp"
+      android:scaleType="centerCrop"
+      android:src="@drawable/weather_sun" />
+  
+    <TextView
+        android:id="@+id/user_matric"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="5dp"
+        android:gravity="center"
+        android:text="a0073032"
+        android:textColor="#ffffff"
+        android:textStyle="bold" />
+        
+    </RelativeLayout>
+  
 	
 
-</LinearLayout>
+</RelativeLayout>
