@@ -27,4 +27,7 @@
       <color name="p2porange">#ff9306</color>
       <color name="color_grid_grey">#d5d9e1</color>
       <color name="nus_orange">#ff6600</color>
+      <color name="disable_grey">#B2B2B2</color>
+      
+      
 </resources>

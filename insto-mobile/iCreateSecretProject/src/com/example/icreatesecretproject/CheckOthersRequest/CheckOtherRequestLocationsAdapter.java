@@ -66,6 +66,10 @@ public class CheckOtherRequestLocationsAdapter extends BaseAdapter {
 		}
 
 		if (count <= 0) {
+			textView.setTextColor(v.getResources().getColor(
+					R.color.disable_grey));
+			gleamTextView.setTextColor(v.getResources().getColor(
+					R.color.disable_grey));
 			ImageView ds = (ImageView) v.findViewById(R.id.status_dot);
 			ds.setImageResource(R.drawable.ic_dot);
 			v.setEnabled(false);

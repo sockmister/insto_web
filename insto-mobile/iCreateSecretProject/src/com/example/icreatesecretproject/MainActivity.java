@@ -217,12 +217,9 @@ public class MainActivity extends BaseActivity {
 			JSONObject pin1Object;
 			JSONObject pin2Object;
 			JSONObject pin3Object;
-			
+
 			userObject = json.getJSONObject("user");
-			pin1Object = json.getJSONObject("pin1_location");
-			pin2Object = json.getJSONObject("pin2_location");
-			pin3Object = json.getJSONObject("pin3_location");
-			
+
 			final String pin1 = userObject.getString("pin1");
 			final String pin2 = userObject.getString("pin2");
 			final String pin3 = userObject.getString("pin3");
@@ -242,7 +239,8 @@ public class MainActivity extends BaseActivity {
 					}
 				});
 			} else {
-				button1.setText("Location: " + pin1Object.getString("name"));
+				pin1Object = json.getJSONObject("pin1_location");
+				button1.setText(pin1Object.getString("name"));
 				button1.setBackgroundResource(R.drawable.bg_orange_pin_box);
 				button1.setOnClickListener(new OnClickListener() {
 					@Override
@@ -278,7 +276,8 @@ public class MainActivity extends BaseActivity {
 					}
 				});
 			} else {
-				button2.setText("Location: " + pin2Object.getString("name"));
+				pin2Object = json.getJSONObject("pin2_location");
+				button2.setText(pin2Object.getString("name"));
 				button2.setBackgroundResource(R.drawable.bg_orange_pin_box);
 				button2.setOnClickListener(new OnClickListener() {
 					@Override
@@ -314,7 +313,8 @@ public class MainActivity extends BaseActivity {
 					}
 				});
 			} else {
-				button3.setText("Location: " + pin3Object.getString("name"));
+				pin3Object = json.getJSONObject("pin3_location");
+				button3.setText(pin3Object.getString("name"));
 				button3.setBackgroundResource(R.drawable.bg_orange_pin_box);
 				button3.setOnClickListener(new OnClickListener() {
 					@Override

@@ -46,6 +46,9 @@ public class BaseSubActivity extends SlidingFragmentActivity {
 					TakePhotoActivity.class);
 			startActivity(intent2);
 			break;
+		default:
+			onBackPressed();
+			return true;
 		}
 		return false;
 	}
