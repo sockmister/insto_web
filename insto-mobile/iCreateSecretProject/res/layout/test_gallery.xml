@@ -144,7 +144,7 @@
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:background="@color/nus_orange"
-            android:text="Request fulfilled."/>
+            android:text="Request fulfilled"/>
 
     </RelativeLayout>
   

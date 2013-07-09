@@ -272,6 +272,7 @@ public class MyRequestActivity extends BaseActivity {
 									Toast.makeText(getApplicationContext(),
 											"Request sent", Toast.LENGTH_LONG)
 											.show();
+									loadMyRequest();
 								}
 							}
 						});
