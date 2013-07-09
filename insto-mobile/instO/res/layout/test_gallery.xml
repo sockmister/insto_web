@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"  >
+   
+		<android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" />
+
+		<LinearLayout
+		    android:id="@+id/empty_msg"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_centerHorizontal="true"
+		    android:layout_centerVertical="true" 
+		    android:orientation="vertical"
+		    android:visibility="invisible">
+
+			<ImageView
+			    android:layout_width="wrap_content"
+			    android:layout_height="25dp"
+			    android:src="@drawable/ic_no_post" />
+
+		    <TextView
+		        android:id="@+id/row_title"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_centerHorizontal="true"
+		        android:layout_centerVertical="true"
+		        android:layout_weight="1"
+		        android:fontFamily="HelveticaNeue-CondensedBold.ttf"
+		        android:gravity="center"
+		        android:text="No image loaded today"
+		        android:textSize="20sp"
+		        android:textStyle="bold" />
+		    <TextView
+			    android:id="@+id/row_title"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:fontFamily="HelveticaNeue-CondensedBold.ttf"
+			    android:gravity="center"
+			    android:text="Why don't you help by posting one :)"
+			    android:textSize="15sp"
+			    android:textStyle="bold" />
+		</LinearLayout>
+		
+	</RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/submission_info_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.0000001"
+        android:background="@color/nus_orange" >
+        
+        
+	    <com.viewpagerindicator.CirclePageIndicator
+	        android:id="@+id/indicator"
+	        android:layout_width="fill_parent"
+	        android:layout_height="30dp"
+	        android:padding="10dip"
+	    	android:background="@color/color_brown" />
+	    
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/info_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.14" 
+        android:background="@color/nus_orange">
+       
+        <TextView 
+            android:id="@+id/latest_time_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="2dp"
+            android:text="Latest Time"/>
+        <TextView 
+            android:id="@+id/latest_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/latest_time_label"
+            android:textSize="15dp"
+            android:fontFamily="HelveticaNeue-CondensedBold.ttf"
+            android:padding="3dp"
+            android:textColor="#ffffff"
+            android:background="@color/nus_orange"
+            android:hint="l time"/>
+
+        <TextView
+            android:id="@+id/earliest_time_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true" 
+            android:paddingRight="2dp"
+            android:text="Earliest Time"/>
+         <TextView
+            android:id="@+id/earliest_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/earliest_time_label" 
+            android:textSize="15dp"
+            android:fontFamily="HelveticaNeue-CondensedBold.ttf"
+            android:padding="3dp"
+            android:textColor="#ffffff"
+            android:background="@color/nus_orange"
+            android:hint="e time"/>
+"
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textSize="20dp"
+            android:fontFamily="HelveticaNeue-CondensedBold.ttf"
+            android:padding="3dp"
+            android:textColor="#ffffff"
+            android:background="@color/nus_orange"
+            android:hint="Date" />
+
+	</RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/gleam_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.30"
+        android:visibility="invisible" >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" >
+
+            <Button
+                android:id="@+id/button_add_gleam"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/gleam"
+                android:background="@drawable/btn_plus" />
+
+            <TextView
+                android:id="@+id/gleam"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_weight="0.12"
+                android:background="@drawable/bg_gleam_value"
+                android:fontFamily="HelveticaNeue-CondensedBold.ttf"
+                android:gravity="center"
+                android:hint="0"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/request_fulfilled_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.30"
+        android:visibility="invisible">
+
+        <Button
+            android:id="@+id/button_request_fulfilled"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/btn_accept_request" />
+
+        <TextView
+            android:id="@+id/request_fufilled_text"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button_request_fulfilled"
+            android:layout_centerHorizontal="true"
+            android:text="Request fulfilled" />
+
+    </RelativeLayout>
+  
+</LinearLayout>
