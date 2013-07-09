@@ -25,6 +25,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxStatus;
@@ -248,6 +249,10 @@ public class LocationDisplayInformationActivity extends BaseSubActivity {
 							LocationDisplayInformationActivity.this,
 							"jsonCallback3");
 					Log.i("LOCATION IN FACULTY ACTION)", id);
+					
+					Toast.makeText(getApplicationContext(),
+							"Thank you for your response!", Toast.LENGTH_LONG)
+							.show();
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -273,6 +278,15 @@ public class LocationDisplayInformationActivity extends BaseSubActivity {
 							LocationDisplayInformationActivity.this,
 							"jsonCallback3");
 					Log.i("LOCATION IN FACULTY ACTION)", id);
+					
+					Toast.makeText(getApplicationContext(),
+							"Thank you for your response!", Toast.LENGTH_LONG)
+							.show();
+					
+					addGleamLayout.setVisibility(View.VISIBLE);
+					requestFulfilledLayout.setVisibility(View.GONE);
+					addGleam.setEnabled(false);
+					addGleam.setAlpha(0.35f);
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -294,13 +308,13 @@ public class LocationDisplayInformationActivity extends BaseSubActivity {
 				// if request is sent and not fulfilled, then we allow user to say request fulfilled
 				// if request is sent and fulfilled, then user must have considered to sent gleam 
 				// for that particular submission
-				if(firstO.get("request_sent_by_user").equals("true") && firstO.get("request_fulfilled").equals("f")){
+				if(firstO.get("request_sent_by_user").equals("true") || firstO.get("request_fulfilled").equals("f")){
 					addGleamLayout.setVisibility(View.GONE);
 					requestFulfilledLayout.setVisibility(View.VISIBLE);
-					if(firstO.get("sent_gleam").equals("true")){
-						requestFulfilled.setEnabled(false);
-						requestFulfilled.setAlpha(0.35f);
-					}
+//					if(firstO.get("sent_gleam").equals("true")){
+//						requestFulfilled.setEnabled(false);
+//						requestFulfilled.setAlpha(0.35f);
+//					}
 				}
 				else{
 					addGleamLayout.setVisibility(View.VISIBLE);
