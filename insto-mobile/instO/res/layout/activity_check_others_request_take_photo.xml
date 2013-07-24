@@ -1,0 +1,38 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".CheckOthersRequestActivity" >
+
+    <FrameLayout
+        android:id="@+id/fragment_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/toggle_switch" >
+
+	</FrameLayout>
+
+    <Switch
+        android:id="@+id/toggle_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="10dp" 
+        android:fontFamily="HelveticaNeue-CondensedBold.ttf"
+        android:textColor="@color/color_wizard_white"
+        android:textColorHint="@color/color_wizard_white"
+		android:textStyle="bold"
+		android:textOn="Msg"
+		android:textOff="Cam"
+		android:thumb="@drawable/switch_selector"
+		android:thumbTextPadding="8dp"
+		android:track="@drawable/bg_switch_selector"
+        android:paddingBottom="10dp"/>
+    
+ 
+
+</RelativeLayout>
