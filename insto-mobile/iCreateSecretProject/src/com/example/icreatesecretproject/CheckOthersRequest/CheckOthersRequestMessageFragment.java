@@ -1,5 +1,9 @@
 package com.example.icreatesecretproject.CheckOthersRequest;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -7,6 +11,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -140,10 +145,12 @@ public class CheckOthersRequestMessageFragment extends ListFragment implements
 				v = vi.inflate(R.layout.list_item_messages, null);
 			}
 			TextView tv = (TextView) v.findViewById(R.id.message);
+			TextView messageDate = (TextView) v.findViewById(R.id.message_date);
 			try {
 				tv.setText("\" "
 						+ messageArray.getJSONObject(position).getString(
 								"message") + " \"");
+				messageDate.setText(getDate(messageArray.getJSONObject(position).getString("created_at")));
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -152,5 +159,27 @@ public class CheckOthersRequestMessageFragment extends ListFragment implements
 			return v;
 		}
 
+	}
+	
+	private String getDate(String dateCreated) {
+		Log.i("IN FACULTY", dateCreated);
+		String _date = "";
+		String _time = "";
+		SimpleDateFormat format = new SimpleDateFormat(
+				"yyyy-MM-dd'T'HH:mm:ss");
+		// format.setTimeZone(TimeZone.getTimeZone("UTC"));
+		Date date;
+		try {
+			date = format.parse(dateCreated);
+			java.text.DateFormat dateFormat = android.text.format.DateFormat
+					.getDateFormat(this.getActivity());
+			_date = dateFormat.format(date);
+			dateFormat = android.text.format.DateFormat.getTimeFormat(this.getActivity());
+			_time = dateFormat.format(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		return _date + " " + _time;
 	}
 }
