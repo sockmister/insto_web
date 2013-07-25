@@ -333,7 +333,10 @@ public class MyRequestActivity extends BaseActivity {
 		try {
 			reqArray = json.getJSONArray(0);
 			if (reqArray == null || reqArray.length() == 0) {
+				Log.i("MY REQUEST", reqArray.toString());
 				emMsg.setVisibility(View.VISIBLE);
+			} else {
+				emMsg.setVisibility(View.INVISIBLE);
 			}
 			lv.setAdapter(new MyRequestAdapter(this, reqArray));
 			lv.setOnItemClickListener(new OnItemClickListener() {
