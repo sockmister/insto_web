@@ -288,6 +288,7 @@ public class LocationDisplayInformationActivity extends BaseSubActivity {
 
 		if (json.length() > 0) {
 			try {
+				System.out.println("here");
 				JSONObject firstO = json.getJSONObject(0);
 				JSONObject lastO = json.getJSONObject(json.length() - 1);
 
@@ -364,7 +365,7 @@ public class LocationDisplayInformationActivity extends BaseSubActivity {
 		Log.i("IN FACULTY", dateCreated);
 		String _time = "";
 		SimpleDateFormat format = new SimpleDateFormat(
-				"yyyy-MM-dd'T'HH:mm:ss'Z'");
+				"yyyy-MM-dd'T'HH:mm:ss");
 		// format.setTimeZone(TimeZone.getTimeZone("UTC"));
 		Date date;
 		try {
